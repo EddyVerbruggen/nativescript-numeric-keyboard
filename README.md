@@ -1,5 +1,7 @@
 # NativeScript Numeric Keyboard
 
+> Best not to use the yet as I'm figuring out what the best way is to grab the entered data, and what's the best way to integrate it with Angular.
+
 <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/_readme-header.png" style="max-width: 100%"/>
 
 ## Installation
