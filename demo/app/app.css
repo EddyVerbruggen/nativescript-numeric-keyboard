@@ -1,0 +1,20 @@
+﻿Page {
+  padding: 10;
+}
+
+Label {
+  font-size: 14;
+  padding: 14;
+}
+
+.title {
+  font-size: 16;
+  font-weight: bold;
+}
+
+NumericKeyboard, TextField {
+  font-size: 14;
+  padding: 14;
+  width: 120;
+  text-align: right;
+}
