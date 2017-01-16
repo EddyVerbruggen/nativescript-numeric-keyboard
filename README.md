@@ -22,7 +22,7 @@ After adding the plugin you can add a namespace to your view (using `NumKey` bel
 
 ```xml
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:NK="nativescript-numeric-keyboard">
-  <NumKey:NumericKeyboardView text="123.45"/>
+  <NK:NumericKeyboardView text="123.45"/>
 </Page>
 ```
 
@@ -33,7 +33,7 @@ For comparison sake we kick off with the default appearance of a `TextView` and 
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/regular-number.png" width="187px" height="333px"/> | `<TextView keyboardType="number" text="1.23"/>` |
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/regular-phone.png" width="187px" height="333px"/> | `<TextView keyboardType="phone" text="12.34"/>` |
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/default-plugin-appearance.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView text="123.45"/>` |
-| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/custom-button-title.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView text="234.56" returnKeyTitle="OK"/>` |
+| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/custom-button-title.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView __returnKeyTitle="OK"__ text="234.56"/>` |
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/no-decimals.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView noDecimals="true" text="345"/>` |
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/no-return-key.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView noReturnKey="true" text="678"/>` |
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/locale-en_US.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView locale="en_US" text="456.78"/>` |
