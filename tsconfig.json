@@ -30,6 +30,7 @@
   },
   "exclude": [
     "demo",
+    "angular",
     "node_modules"
   ],
   "compileOnSave": false

@@ -1,7 +1,5 @@
 # NativeScript Numeric Keyboard
 
-> _WARNING_ Best not to use this yet as I'm figuring out what the best way is to grab the entered data, and what's the best way to integrate it with Angular.
-
 <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/_readme-header.png" style="max-width: 100%"/>
 
 ## Installation
@@ -15,29 +13,31 @@ tns plugin add nativescript-numeric-keyboard
 Check out [the demo](demo) to play with the keyboard. You can run it by typing `npm run demo.iphone` / `npm run demo.ipad` at the root of the project.
 
 ## How it works
-This plugin wraps a [native keyboard library](https://cocoapods.org/?q=MMNumberKeyboard) and extends a regular [NativeScript TextField](https://docs.nativescript.org/cookbook/ui/text-field). You can set any property you'd normally set on this widget (`class`, `text`, etc) and a few plugin-specific properties as well.
+This plugin wraps a [native keyboard library](https://cocoapods.org/?q=MMNumberKeyboard) and extends a regular [NativeScript TextView](https://docs.nativescript.org/cookbook/ui/text-view). You can set any property you'd normally set on this widget (`class`, `text`, etc) and a few plugin-specific properties as well.
+
+You can either define the keyboard in XML or in code - use whichever tickles your fancy.
 
 ## Screenshot-driven documentation
-After adding the plugin you can add a namespace to your view (using `NumKey` below) and use the `NumericKeyboard` tag to render a TextField powered by this plugin.
+After adding the plugin you can add a namespace to your view (using `NumKey` below) and use the `NumericKeyboardView` tag to render a TextView powered by this plugin.
 
 ```xml
-<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:NumKey="nativescript-numeric-keyboard">
-  <NumKey:NumericKeyboard text="123.45"/>
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:NK="nativescript-numeric-keyboard">
+  <NumKey:NumericKeyboardView text="123.45"/>
 </Page>
 ```
 
-For comparison sake we kick off with the default appearance of a `TextField` and then showcase the various properties this plugin exposes:
+For comparison sake we kick off with the default appearance of a `TextView` and then showcase the various properties this plugin exposes:
 
 | Appearance | Declaration |
 --- | --- | ---
-| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/regular-number.png" width="187px" height="333px"/> | `<TextField keyboardType="number" text="1.23"/>` |
-| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/regular-phone.png" width="187px" height="333px"/> | `<TextField keyboardType="phone" text="12.34"/>` |
-| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/default-plugin-appearance.png" width="187px" height="333px"/> | `<NumKey:NumericKeyboard text="123.45"/>` |
-| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/custom-button-title.png" width="187px" height="333px"/> | `<NumKey:NumericKeyboard text="234.56" returnKeyTitle="OK"/>` |
-| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/no-decimals.png" width="187px" height="333px"/> | `<NumKey:NumericKeyboard noDecimals="true" text="345"/>` |
-| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/no-return-key.png" width="187px" height="333px"/> | `<NumKey:NumericKeyboard noReturnKey="true" text="678"/>` |
-| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/locale-en_US.png" width="187px" height="333px"/> | `<NumKey:NumericKeyboard locale="en_US" text="456.78"/>` |
-| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/locale-nl_NL.png" width="187px" height="333px"/> | `<NumKey:NumericKeyboard locale="nl_NL" text="567,89"/>` |
+| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/regular-number.png" width="187px" height="333px"/> | `<TextView keyboardType="number" text="1.23"/>` |
+| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/regular-phone.png" width="187px" height="333px"/> | `<TextView keyboardType="phone" text="12.34"/>` |
+| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/default-plugin-appearance.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView text="123.45"/>` |
+| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/custom-button-title.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView text="234.56" returnKeyTitle="OK"/>` |
+| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/no-decimals.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView noDecimals="true" text="345"/>` |
+| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/no-return-key.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView noReturnKey="true" text="678"/>` |
+| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/locale-en_US.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView locale="en_US" text="456.78"/>` |
+| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/locale-nl_NL.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView locale="nl_NL" text="567,89"/>` |
 
 
 ### iPad appearance
@@ -45,5 +45,56 @@ iPad appearance is similar, except for some blank space on both sides of the key
 
 | Appearance | Declaration |
 --- | --- | ---
-| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/ipad-regular-phone.png" width="344px"/> | `<TextField keyboardType="phone" text="12.34"/>` |
-| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/ipad-default-appearance.png" width="344px"/> | `<NumKey:NumericKeyboard text="123.45"/>` |
+| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/ipad-regular-phone.png" width="344px"/> | `<TextView keyboardType="phone" text="12.34"/>` |
+| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/ipad-default-appearance.png" width="344px"/> | `<NK:NumericKeyboard text="123.45"/>` |
+
+## Usage with Angular
+Open `app.module.ts` and add:
+
+```js
+import { NSNUMKEY_DIRECTIVES } from "nativescript-numeric-keyboard/angular";
+
+declarations: [
+  NSNUMKEY_DIRECTIVES,
+  // any other declarations
+]
+```
+
+For the views you can take a look at the examples above and just replace `NumKey:NumericKeyboardView` by `NumericKeyboard `:
+
+```html
+  <NumericKeyboard noDecimals="true"></NumericKeyboard>
+```
+
+## Programmatic usage
+Say you have a plain old `TextView` in your view:
+
+```html
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
+  <TextView id="myTextView" keyboardType="number" text="{{ myTextPlugin }}" />
+</Page>
+```
+
+Now you can enhance the `TextView` with this plugin by doing this in the `pageLoaded` event you've defined in the `<Page>` tag above:
+
+```js
+import { NumericKeyboard } from "nativescript-numeric-keyboard";
+
+export function pageLoaded(args: observable.EventData) {
+  let page = <pages.Page>args.object;
+  let textView = <TextView>page.getViewById("defaultPluginKeyboard");
+
+  // this is an example with all possible properties, not that they make sense combined :)
+  new NumericKeyboard().decorate({
+    textView: textView,
+    returnKeyTitle: "Go!",
+    locale: "en_US", // or "nl_NL", or any valid locale really (to define the decimal char)
+    noReturnKey: true,
+    noDecimals: true
+  });
+}
+```
+
+Note that you really need to use a `TextView`, not a `TextField` for this to work as rendering the keyboard works fine, but getting its value just seems to get messed up when we set a different keyboard view. Shouldn't be a problem though, just something to keep in mind.
+
+Also note that on Android you'll just get a numeric keyboard as usual (since we specified `keyboardType="number"`).
