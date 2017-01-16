@@ -3,18 +3,23 @@
 }
 
 Label {
-  font-size: 14;
-  padding: 14;
+  font-size: 12;
+  padding: 10;
 }
 
 .title {
-  font-size: 16;
+  font-size: 14;
   font-weight: bold;
 }
 
-NumericKeyboard, TextField {
-  font-size: 14;
-  padding: 14;
+TextView, NumericKeyboardView {
+  font-size: 12;
+  padding: 10;
   width: 120;
   text-align: right;
+}
+
+/* Enhanced TextViews are transparent by default */
+.notEnhancedTextView {
+  background-color: transparent;
 }

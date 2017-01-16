@@ -1,32 +1,34 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:NumKey="nativescript-numeric-keyboard" loaded="pageLoaded">
   <StackLayout horizontalAlignment="center">
     <Label class="title" text="Tap the numbers to see various versions of this awesome iOS numeric keyboard" textWrap="true" textAlignment="center"/>
-    <GridLayout rows="auto, auto, auto, auto, auto, auto, auto, auto" columns="*, auto">
+    <ScrollView verticalAlignment="top" style="background-color: #eee">
+      <GridLayout rows="auto, auto, auto, auto, auto, auto, auto, auto" columns="*, auto">
 
-      <Label row="0" col="0" text="Regular 'number' keyboard"/>
-      <TextField class="number" keyboardType="number" row="0" col="1" text="1.23"/>
+        <Label row="0" col="0" text="Regular 'number' keyboard"/>
+        <TextView class="notEnhancedTextView" keyboardType="number" row="0" col="1" text="{{ myText }}" propertyChange="{{ onPropertyChange }}"/>
 
-      <Label row="1" col="0" text="Regular 'phone' keyboard"/>
-      <TextField class="number" keyboardType="phone" row="1" col="1" text="12.34"/>
+        <Label row="1" col="0" text="Regular 'phone' keyboard"/>
+        <TextView class="notEnhancedTextView" keyboardType="phone" row="1" col="1" text="12.34"/>
 
-      <Label row="2" col="0" text="Default plugin keyboard"/>
-      <NumKey:NumericKeyboard row="2" col="1" text="123.45"/>
+        <Label row="2" col="0" text="Plugin keyboard (by code)"/>
+        <TextView id="defaultPluginKeyboard" keyboardType="number" row="2" col="1" text="{{ myTextPlugin }}" propertyChange="{{ onPropertyChangePlugin }}"/>
 
-      <Label row="3" col="0" text="Custom button title"/>
-      <NumKey:NumericKeyboard row="3" col="1" text="234.56" returnKeyTitle="OK"/>
+        <Label row="3" col="0" text="Custom button title"/>
+        <NumKey:NumericKeyboardView row="3" col="1" returnKeyTitle="OK :)" text="{{ myTextViewPlugin }}" propertyChange="{{ onPropertyChangeViewPlugin }}"/>
 
-      <Label row="4" col="0" text="No decimals"/>
-      <NumKey:NumericKeyboard row="4" col="1" noDecimals="true" text="345"/>
+        <Label row="4" col="0" text="No decimals"/>
+        <NumKey:NumericKeyboardView row="4" col="1" noDecimals="true" text="345"/>
 
-      <Label row="5" col="0" text="Locale en_US (point)"/>
-      <NumKey:NumericKeyboard row="5" col="1" locale="en_US" text="456.78"/>
+        <Label row="5" col="0" text="Locale en_US (point)"/>
+        <NumKey:NumericKeyboardView row="5" col="1" locale="en_US" text="456.78"/>
 
-      <Label row="6" col="0" text="Locale nl_NL (comma)"/>
-      <NumKey:NumericKeyboard row="6" col="1" locale="nl_NL" text="567,89"/>
+        <Label row="6" col="0" text="Locale nl_NL (comma)"/>
+        <NumKey:NumericKeyboardView row="6" col="1" locale="nl_NL" text="567,89"/>
 
-      <Label row="7" col="0" text="No return key"/>
-      <NumKey:NumericKeyboard row="7" col="1" noReturnKey="true" text="678"/>
-
-    </GridLayout>
+        <Label row="7" col="0" text="No return key"/>
+        <NumKey:NumericKeyboardView id="noReturnKey" noReturnKey="true" row="7" col="1" text="678"/>
+      </GridLayout>
+    </ScrollView>
+    <Button horizontalAlignment="center" text="submit" tap="{{ onSubmit }}"/>
   </StackLayout>
 </Page>
