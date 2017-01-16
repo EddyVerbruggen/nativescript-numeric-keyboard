@@ -33,7 +33,7 @@ For comparison sake we kick off with the default appearance of a `TextView` and 
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/regular-number.png" width="187px" height="333px"/> | `<TextView keyboardType="number" text="1.23"/>` |
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/regular-phone.png" width="187px" height="333px"/> | `<TextView keyboardType="phone" text="12.34"/>` |
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/default-plugin-appearance.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView text="123.45"/>` |
-| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/custom-button-title.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView __returnKeyTitle="OK"__ text="234.56"/>` |
+| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/custom-button-title.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView returnKeyTitle="OK" text="234.56"/>` |
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/no-decimals.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView noDecimals="true" text="345"/>` |
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/no-return-key.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView noReturnKey="true" text="678"/>` |
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/locale-en_US.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView locale="en_US" text="456.78"/>` |
@@ -41,7 +41,7 @@ For comparison sake we kick off with the default appearance of a `TextView` and 
 
 
 ### iPad appearance
-iPad appearance is similar, except for some blank space on both sides of the keyboard:
+It's similar, except for some padding on both sides of the keyboard:
 
 | Appearance | Declaration |
 --- | --- | ---
@@ -63,7 +63,7 @@ declarations: [
 For the views you can take a look at the examples above and just replace `NumKey:NumericKeyboardView` by `NumericKeyboard `:
 
 ```html
-  <NumericKeyboard noDecimals="true"></NumericKeyboard>
+<NumericKeyboard noDecimals="true"></NumericKeyboard>
 ```
 
 ## Programmatic usage
