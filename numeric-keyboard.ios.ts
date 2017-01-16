@@ -158,7 +158,6 @@ class MMNumberKeyboardDelegateImpl extends NSObject /* implements MMNumberKeyboa
    */
 
   public numberKeyboardShouldReturn(keyboard) {
-    console.log("--- delegate: numberKeyboardShouldReturn, this._onReturnKeyPressedCallback: " + this._onReturnKeyPressedCallback);
     if (this._onReturnKeyPressedCallback) {
       return this._onReturnKeyPressedCallback(keyboard);
     } else {
