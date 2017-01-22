@@ -82,7 +82,7 @@ import { NumericKeyboard } from "nativescript-numeric-keyboard";
 
 export function pageLoaded(args: observable.EventData) {
   let page = <pages.Page>args.object;
-  let textView = <TextView>page.getViewById("defaultPluginKeyboard");
+  let textView = <TextView>page.getViewById("myTextView");
 
   // this is an example with all possible properties, not that they make sense combined :)
   new NumericKeyboard().decorate({
