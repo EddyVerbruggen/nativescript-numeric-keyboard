@@ -5,6 +5,7 @@ export interface NumericKeyboardOptions {
     noReturnKey?: boolean;
     returnKeyTitle?: string;
     locale?: string;
+    noIpadInputBar?: boolean;
 }
 export interface NumericKeyboardApi {
     decorate(args: NumericKeyboardOptions): Promise<any>;

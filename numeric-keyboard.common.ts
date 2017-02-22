@@ -6,6 +6,7 @@ export interface NumericKeyboardOptions {
   noReturnKey?: boolean;
   returnKeyTitle?: string;
   locale?: string;
+  noIpadInputBar?: boolean;
   // onReturnKeyPressed?: (keyboard: any) => boolean;
 }
 

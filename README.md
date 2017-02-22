@@ -91,7 +91,8 @@ export function pageLoaded(args: observable.EventData) {
     returnKeyTitle: "Go!",
     locale: "en_US", // or "nl_NL", or any valid locale really (to define the decimal char)
     noReturnKey: true,
-    noDecimals: true
+    noDecimals: true,
+    noIpadInputBar: true // suppress the bar with buttons iOS renders on iPad since iOS 9
   });
 }
 ```

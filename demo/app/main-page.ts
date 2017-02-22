@@ -15,6 +15,7 @@ export function pageLoaded(args: observable.EventData) {
     textView: textView,
     returnKeyTitle: "Go!",
     locale: "en_US",
-    noDecimals: true
+    noDecimals: true,
+    noIpadInputBar: true
   });
 }
