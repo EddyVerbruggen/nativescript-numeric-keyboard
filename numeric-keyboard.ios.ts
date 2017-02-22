@@ -45,11 +45,13 @@ export class NumericKeyboard implements NumericKeyboardApi {
         }
       }
 
-      args.textView.ios.inputView = this._keyboard; // kills events firing..
-
-      // if not set by the user make it transparent (just like regular TextFields are)
-      if (!args.textView.backgroundColor) {
-        args.textView.backgroundColor = new Color("transparent");
+      if (args.textView.ios === undefined) {
+        (<any>args.textView).inputView = this._keyboard;
+      } else {
+        args.textView.ios.inputView = this._keyboard;
+        if (!args.textView.backgroundColor) {
+          args.textView.backgroundColor = new Color("transparent");
+        }
       }
 
       resolve();
