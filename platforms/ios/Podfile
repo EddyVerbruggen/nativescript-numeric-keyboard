@@ -1,1 +1,1 @@
-pod 'MMNumberKeyboard'
+pod 'MMNumberKeyboard', :git => 'https://github.com/EddyVerbruggen/MMNumberKeyboard.git', :commit => 'be63229b25ad3aa6f85c7ba481d5031db73fc736'
