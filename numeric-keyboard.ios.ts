@@ -45,13 +45,16 @@ export class NumericKeyboard implements NumericKeyboardApi {
         }
       }
 
-      if (args.textView.ios === undefined) {
-        (<any>args.textView).inputView = this._keyboard;
-      } else {
-        args.textView.ios.inputView = this._keyboard;
-        if (!args.textView.backgroundColor) {
-          args.textView.backgroundColor = new Color("transparent");
-        }
+      let nativeView = args.textView.ios ? args.textView.ios : args.textView;
+      nativeView.inputView = this._keyboard;
+
+      if (args.textView.ios !== undefined && !args.textView.backgroundColor) {
+        args.textView.backgroundColor = new Color("transparent");
+      }
+
+      if (args.noIpadInputBar && nativeView.inputAssistantItem) {
+        nativeView.inputAssistantItem.leadingBarButtonGroups = [];
+        nativeView.inputAssistantItem.trailingBarButtonGroups = [];
       }
 
       resolve();
@@ -64,6 +67,7 @@ export class NumericKeyboardView extends TextView {
   private _locale: string;
   private _noDecimals: boolean;
   private _noReturnKey: boolean;
+  private _noIpadInputBar: boolean;
   private _keyboardDelegate: MMNumberKeyboardDelegateImpl = null;
   private _ios: any;
   private _loaded: boolean = false;
@@ -102,6 +106,11 @@ export class NumericKeyboardView extends TextView {
       // keyboard.returnKeyButtonStyle = MMNumberKeyboardButtonStyleDone; // (Done = default, there's also White and Gray)
       this._ios.inputView = this._keyboard;
 
+      if (this._noIpadInputBar && this._ios.inputAssistantItem) {
+        this._ios.inputAssistantItem.leadingBarButtonGroups = [];
+        this._ios.inputAssistantItem.trailingBarButtonGroups = [];
+      }
+
       // if not set by the user make it transparent (just like regular TextFields are)
       if (!this.backgroundColor) {
         this.backgroundColor = new Color("transparent");
@@ -128,6 +137,10 @@ export class NumericKeyboardView extends TextView {
 
   set noReturnKey(value: boolean) {
     this._noReturnKey = value;
+  }
+
+  set noIpadInputBar(value: boolean) {
+    this._noIpadInputBar = value;
   }
 }
 

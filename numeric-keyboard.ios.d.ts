@@ -10,6 +10,7 @@ export declare class NumericKeyboardView extends TextView {
     private _locale;
     private _noDecimals;
     private _noReturnKey;
+    private _noIpadInputBar;
     private _keyboardDelegate;
     private _ios;
     private _loaded;
@@ -20,4 +21,5 @@ export declare class NumericKeyboardView extends TextView {
     noDecimals: boolean;
     locale: string;
     noReturnKey: boolean;
+    noIpadInputBar: boolean;
 }
