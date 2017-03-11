@@ -1,4 +1,5 @@
 # NativeScript Numeric Keyboard
+For iOS. Falls back to the best platform-provided numeric keyboard on Android. Note that the iPad UI looks a bit sleeker than shown in the screenshot below.
 
 <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/_readme-header.png" style="max-width: 100%"/>
 
