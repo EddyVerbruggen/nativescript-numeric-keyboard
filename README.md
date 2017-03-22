@@ -30,7 +30,7 @@ After adding the plugin you can add a namespace to your view (using `NumKey` bel
 For comparison sake we kick off with the default appearance of a `TextView` and then showcase the various properties this plugin exposes:
 
 | Appearance | Declaration |
---- | --- | ---
+| --- | --- |
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/regular-number.png" width="187px" height="333px"/> | `<TextView keyboardType="number" text="1.23"/>` |
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/regular-phone.png" width="187px" height="333px"/> | `<TextView keyboardType="phone" text="12.34"/>` |
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/default-plugin-appearance.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView text="123.45"/>` |
@@ -45,7 +45,7 @@ For comparison sake we kick off with the default appearance of a `TextView` and 
 It's similar, except for some padding on both sides of the keyboard:
 
 | Appearance | Declaration |
---- | --- | ---
+| --- | --- |
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/ipad-regular-phone.png" width="344px"/> | `<TextView keyboardType="phone" text="12.34"/>` |
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/ipad-default-appearance.png" width="344px"/> | `<NK:NumericKeyboard text="123.45"/>` |
 
