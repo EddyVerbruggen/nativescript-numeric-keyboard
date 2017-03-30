@@ -12,7 +12,7 @@
     "plugin": {
       "nan": true,
       "pan": true,
-      "category": "Iterface"
+      "category": "Interface"
     }
   },
   "scripts": {
