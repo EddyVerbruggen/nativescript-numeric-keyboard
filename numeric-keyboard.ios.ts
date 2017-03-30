@@ -69,7 +69,7 @@ export class NumericKeyboardView extends TextView {
   private _noReturnKey: boolean;
   private _noIpadInputBar: boolean;
   private _keyboardDelegate: MMNumberKeyboardDelegateImpl = null;
-  private _ios: any;
+  public _ios: any;
   private _loaded: boolean = false;
   private _keyboard: any;
   /* MMNumberKeyboard */
@@ -88,12 +88,13 @@ export class NumericKeyboardView extends TextView {
       }
       this._keyboard.allowsDecimalPoint = !this._noDecimals;
 
+      this._keyboardDelegate = MMNumberKeyboardDelegateImpl.initWithOwner(new WeakRef(this));
+      this._keyboard.delegate = this._keyboardDelegate;
+
       if (this._noReturnKey) {
-        this._keyboardDelegate = MMNumberKeyboardDelegateImpl.initWithOwner(new WeakRef(this));
         this._keyboardDelegate.setCallback(function () {
           return false
         });
-        this._keyboard.delegate = this._keyboardDelegate;
         if (!this._returnKeyTitle) {
           this._keyboard.returnKeyTitle = " ";
           this._keyboard.returnKeyButtonStyle = MMNumberKeyboardButtonStyleGray; // (Done (blue) = default, there's also White)
@@ -162,15 +163,13 @@ class MMNumberKeyboardDelegateImpl extends NSObject /* implements MMNumberKeyboa
     this._onReturnKeyPressedCallback = callback;
   }
 
-  /* no need for these yet
-   public numberKeyboardShouldInsertText(keyboard, text) {
-   return true;
-   }
-
-   public numberKeyboardShouldDeleteBackward(keyboard) {
-   return true;
-   }
-   */
+  public numberKeyboardShouldInsertText(keyboard, text) {
+    if (text === "." || text === ",") {
+      const oldText = this._owner.get().text;
+      return oldText.indexOf(".") === -1 && oldText.indexOf(",") === -1;
+    }
+    return true;
+  }
 
   public numberKeyboardShouldReturn(keyboard) {
     if (this._onReturnKeyPressedCallback) {
