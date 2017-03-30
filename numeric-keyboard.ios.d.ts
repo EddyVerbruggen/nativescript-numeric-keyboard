@@ -12,7 +12,7 @@ export declare class NumericKeyboardView extends TextView {
     private _noReturnKey;
     private _noIpadInputBar;
     private _keyboardDelegate;
-    private _ios;
+    _ios: any;
     private _loaded;
     private _keyboard;
     readonly ios: any;

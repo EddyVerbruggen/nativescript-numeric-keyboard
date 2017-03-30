@@ -1,6 +1,6 @@
 {
   "name": "nativescript-numeric-keyboard",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Handy and elegant numeric keyboard for iOS NativeScript apps. On Android we fall back to the regular numeric keyboard for now.",
   "main": "numeric-keyboard",
   "typings": "index.d.ts",
@@ -8,11 +8,16 @@
     "platforms": {
       "android": "2.3.0",
       "ios": "2.3.0"
+    },
+    "plugin": {
+      "nan": true,
+      "pan": true,
+      "category": "Iterface"
     }
   },
   "scripts": {
     "build": "tsc",
-    "demo.iphone": "npm run preparedemo && cd demo && tns emulate ios --device 'iPhone 7'",
+    "demo.ios": "npm run preparedemo && cd demo && tns emulate ios",
     "demo.ipad": "npm run preparedemo && cd demo && tns emulate ios --device 'iPad Air 2'",
     "demo.ios.device": "npm run preparedemo && cd demo && tns run ios",
     "demo.android": "npm run preparedemo && cd demo && tns run android",
