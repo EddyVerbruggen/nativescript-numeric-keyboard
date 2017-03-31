@@ -4,6 +4,7 @@
 *.js.map
 *.log
 !scripts/*.js
+!angular/*.js
 demo/app/*.js
 !demo/karma.conf.js
 !demo/app/tests/*.js
