@@ -42,7 +42,7 @@ For comparison sake we kick off with the default appearance of a `TextView` and 
 
 
 ### iPad appearance
-It's similar, except for some padding on both sides of the keyboard:
+It's similar (although a bit cleaner than in these screenshots), except for some padding on both sides of the keyboard:
 
 | Appearance | Declaration |
 | --- | --- |
