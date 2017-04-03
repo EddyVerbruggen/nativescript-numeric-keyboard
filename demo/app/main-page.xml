@@ -20,10 +20,10 @@
         <NumKey:NumericKeyboardView row="4" col="1" noDecimals="true" text="345"/>
 
         <Label row="5" col="0" text="Locale en_US (point)"/>
-        <NumKey:NumericKeyboardView row="5" col="1" locale="en_US" text="456.78"/>
+        <NumKey:NumericKeyboardView row="5" col="1" locale="en_US" text="1,456.78"/>
 
         <Label row="6" col="0" text="Locale nl_NL (comma)"/>
-        <NumKey:NumericKeyboardView row="6" col="1" locale="nl_NL" text="567,89"/>
+        <NumKey:NumericKeyboardView row="6" col="1" locale="nl_NL" text="1.567"/>
 
         <Label row="7" col="0" text="No return key"/>
         <NumKey:NumericKeyboardView id="noReturnKey" noIpadInputBar="true" noReturnKey="true" row="7" col="1" text="678"/>

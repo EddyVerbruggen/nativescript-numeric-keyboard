@@ -5,12 +5,31 @@ import { Color } from "color";
 declare const MMNumberKeyboard, CGRectZero, UIInputViewStyleDefault, UIInputViewStyleKeyboard,
     NSLocale, MMNumberKeyboardDelegate, MMNumberKeyboardButtonStyleGray, NSLineBreakByTruncatingHead: any;
 
-export class NumericKeyboard implements NumericKeyboardApi {
+export interface TextAndDecimalSeparatorHolder {
+  getDecimalSeparator(): string;
+  getText(): string;
+}
+
+// make sure this is retained
+let _numkeyboard: NumericKeyboard;
+
+export class NumericKeyboard implements NumericKeyboardApi, TextAndDecimalSeparatorHolder {
   private _keyboardDelegate: MMNumberKeyboardDelegateImpl;
   private _keyboard: any;
+  private _nativeTextView: any;
+  private _decimalSep: string = "unset";
+
+  getDecimalSeparator(): string {
+    return this._decimalSep;
+  };
+
+  getText(): string {
+    return this._nativeTextView.text;
+  };
 
   decorate(args?: NumericKeyboardOptions): Promise<any> {
     const that = this;
+    _numkeyboard = this;
 
     return new Promise((resolve, reject) => {
       if (!args || !args.textView) {
@@ -21,7 +40,10 @@ export class NumericKeyboard implements NumericKeyboardApi {
       let nslocale = null;
       if (args.locale) {
         nslocale = NSLocale.localeWithLocaleIdentifier(args.locale);
+      } else {
+        nslocale = NSLocale.currentLocale;
       }
+      this._decimalSep = nslocale.decimalSeparator;
       this._keyboard = MMNumberKeyboard.alloc().initWithFrameInputViewStyleLocale(CGRectZero, UIInputViewStyleKeyboard, nslocale);
 
       if (args.returnKeyTitle) {
@@ -33,28 +55,29 @@ export class NumericKeyboard implements NumericKeyboardApi {
       // not exposing this just yet (not too useful)
       // keyboard.returnKeyButtonStyle = MMNumberKeyboardButtonStyleDone; // (Done = default, there's also White and Gray)
 
+      this._keyboardDelegate = MMNumberKeyboardDelegateImpl.initWithOwner(new WeakRef(this));
+      this._keyboard.delegate = this._keyboardDelegate;
+
       if (args.noReturnKey) {
-        this._keyboardDelegate = MMNumberKeyboardDelegateImpl.initWithOwner(new WeakRef(this));
         this._keyboardDelegate.setCallback(function () {
           return false
         });
-        this._keyboard.delegate = this._keyboardDelegate;
         if (!args.returnKeyTitle) {
           this._keyboard.returnKeyTitle = " ";
           this._keyboard.returnKeyButtonStyle = MMNumberKeyboardButtonStyleGray; // (Done (blue) = default, there's also White)
         }
       }
 
-      let nativeView = args.textView.ios ? args.textView.ios : args.textView;
-      nativeView.inputView = this._keyboard;
+      this._nativeTextView = args.textView.ios ? args.textView.ios : args.textView;
+      this._nativeTextView.inputView = this._keyboard;
 
       if (args.textView.ios !== undefined && !args.textView.backgroundColor) {
         args.textView.backgroundColor = new Color("transparent");
       }
 
-      if (args.noIpadInputBar && nativeView.inputAssistantItem) {
-        nativeView.inputAssistantItem.leadingBarButtonGroups = [];
-        nativeView.inputAssistantItem.trailingBarButtonGroups = [];
+      if (args.noIpadInputBar && this._nativeTextView.inputAssistantItem) {
+        this._nativeTextView.inputAssistantItem.leadingBarButtonGroups = [];
+        this._nativeTextView.inputAssistantItem.trailingBarButtonGroups = [];
       }
 
       resolve();
@@ -62,7 +85,7 @@ export class NumericKeyboard implements NumericKeyboardApi {
   }
 }
 
-export class NumericKeyboardView extends TextView {
+export class NumericKeyboardView extends TextView implements TextAndDecimalSeparatorHolder {
   private _returnKeyTitle: string;
   private _locale: string;
   private _noDecimals: boolean;
@@ -72,15 +95,27 @@ export class NumericKeyboardView extends TextView {
   public _ios: any;
   private _loaded: boolean = false;
   private _keyboard: any;
-  /* MMNumberKeyboard */
+  private _decimalSep: string = "unset";
 
+  getDecimalSeparator(): string {
+    return this._decimalSep;
+  };
+
+  getText(): string {
+    return this.text;
+  };
+
+  /* MMNumberKeyboard */
   get ios(): any {
     if (!this._loaded) {
       this._loaded = true;
       let nslocale = null;
       if (this._locale) {
         nslocale = NSLocale.localeWithLocaleIdentifier(this._locale);
+      } else {
+        nslocale = NSLocale.currentLocale;
       }
+      this._decimalSep = nslocale.decimalSeparator;
       this._keyboard = MMNumberKeyboard.alloc().initWithFrameInputViewStyleLocale(CGRectZero, UIInputViewStyleDefault, nslocale);
 
       if (this._returnKeyTitle) {
@@ -164,9 +199,10 @@ class MMNumberKeyboardDelegateImpl extends NSObject /* implements MMNumberKeyboa
   }
 
   public numberKeyboardShouldInsertText(keyboard, text) {
-    if (text === "." || text === ",") {
-      const oldText = this._owner.get().text;
-      return oldText.indexOf(".") === -1 && oldText.indexOf(",") === -1;
+    let decimalSeparator: string = (<TextAndDecimalSeparatorHolder>this._owner.get()).getDecimalSeparator();
+    if (text === decimalSeparator) {
+      let oldText: string = "" + (<TextAndDecimalSeparatorHolder>this._owner.get()).getText();
+      return oldText.indexOf(decimalSeparator) === -1;
     }
     return true;
   }
