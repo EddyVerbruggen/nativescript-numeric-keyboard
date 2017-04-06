@@ -107,51 +107,54 @@ export class NumericKeyboardView extends TextView implements TextAndDecimalSepar
 
   /* MMNumberKeyboard */
   get ios(): any {
-    if (!this._loaded) {
-      this._loaded = true;
-      let nslocale = null;
-      if (this._locale) {
-        nslocale = NSLocale.localeWithLocaleIdentifier(this._locale);
-      } else {
-        nslocale = NSLocale.currentLocale;
-      }
-      this._decimalSep = nslocale.decimalSeparator;
-      this._keyboard = MMNumberKeyboard.alloc().initWithFrameInputViewStyleLocale(CGRectZero, UIInputViewStyleDefault, nslocale);
+    // for Angular we need to wait for the textview to have loaded
+    setTimeout(() => {
+      if (!this._loaded) {
+        this._loaded = true;
+        let nslocale = null;
+        if (this._locale) {
+          nslocale = NSLocale.localeWithLocaleIdentifier(this._locale);
+        } else {
+          nslocale = NSLocale.currentLocale;
+        }
+        this._decimalSep = nslocale.decimalSeparator;
+        this._keyboard = MMNumberKeyboard.alloc().initWithFrameInputViewStyleLocale(CGRectZero, UIInputViewStyleDefault, nslocale);
 
-      if (this._returnKeyTitle) {
-        this._keyboard.returnKeyTitle = this._returnKeyTitle;
-      }
-      this._keyboard.allowsDecimalPoint = !this._noDecimals;
+        if (this._returnKeyTitle) {
+          this._keyboard.returnKeyTitle = this._returnKeyTitle;
+        }
+        this._keyboard.allowsDecimalPoint = !this._noDecimals;
 
-      this._keyboardDelegate = MMNumberKeyboardDelegateImpl.initWithOwner(new WeakRef(this));
-      this._keyboard.delegate = this._keyboardDelegate;
+        this._keyboardDelegate = MMNumberKeyboardDelegateImpl.initWithOwner(new WeakRef(this));
+        this._keyboard.delegate = this._keyboardDelegate;
 
-      if (this._noReturnKey) {
-        this._keyboardDelegate.setCallback(function () {
-          return false
-        });
-        if (!this._returnKeyTitle) {
-          this._keyboard.returnKeyTitle = " ";
-          this._keyboard.returnKeyButtonStyle = MMNumberKeyboardButtonStyleGray; // (Done (blue) = default, there's also White)
+        if (this._noReturnKey) {
+          this._keyboardDelegate.setCallback(function () {
+            return false
+          });
+          if (!this._returnKeyTitle) {
+            this._keyboard.returnKeyTitle = " ";
+            this._keyboard.returnKeyButtonStyle = MMNumberKeyboardButtonStyleGray; // (Done (blue) = default, there's also White)
+          }
+        }
+
+        this._ios.textContainer.maximumNumberOfLines = 1;
+        this._ios.textContainer.lineBreakMode = NSLineBreakByTruncatingHead;
+        // not exposing this just yet (not too useful)
+        // keyboard.returnKeyButtonStyle = MMNumberKeyboardButtonStyleDone; // (Done = default, there's also White and Gray)
+        this._ios.inputView = this._keyboard;
+
+        if (this._noIpadInputBar && this._ios.inputAssistantItem) {
+          this._ios.inputAssistantItem.leadingBarButtonGroups = [];
+          this._ios.inputAssistantItem.trailingBarButtonGroups = [];
+        }
+
+        // if not set by the user make it transparent (just like regular TextFields are)
+        if (!this.backgroundColor) {
+          this.backgroundColor = new Color("transparent");
         }
       }
-
-      this._ios.textContainer.maximumNumberOfLines = 1;
-      this._ios.textContainer.lineBreakMode = NSLineBreakByTruncatingHead;
-      // not exposing this just yet (not too useful)
-      // keyboard.returnKeyButtonStyle = MMNumberKeyboardButtonStyleDone; // (Done = default, there's also White and Gray)
-      this._ios.inputView = this._keyboard;
-
-      if (this._noIpadInputBar && this._ios.inputAssistantItem) {
-        this._ios.inputAssistantItem.leadingBarButtonGroups = [];
-        this._ios.inputAssistantItem.trailingBarButtonGroups = [];
-      }
-
-      // if not set by the user make it transparent (just like regular TextFields are)
-      if (!this.backgroundColor) {
-        this.backgroundColor = new Color("transparent");
-      }
-    }
+    }, 0);
     return this._ios;
   }
 
