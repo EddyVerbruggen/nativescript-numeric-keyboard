@@ -18,7 +18,7 @@ This plugin wraps a [native keyboard library](https://cocoapods.org/?q=MMNumberK
 
 You can either define the keyboard in XML or in code - use whichever tickles your fancy.
 
-## Screenshot-driven documentation
+## Screenshot driven documentation
 After adding the plugin you can add a namespace to your view (using `NumKey` below) and use the `NumericKeyboardView` tag to render a TextView powered by this plugin.
 
 ```xml
