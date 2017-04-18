@@ -6,7 +6,7 @@
     "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": false,
-    "declaration": false,
+    "declaration": true,
     "noLib": false,
     "noEmitHelpers": true,
     "experimentalDecorators": true,

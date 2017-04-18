@@ -5,12 +5,13 @@
       <GridLayout rows="auto, auto, auto, auto, auto, auto, auto, auto" columns="*, auto">
 
         <Label row="0" col="0" text="Regular 'number' keyboard"/>
-        <TextView className="notEnhancedTextView" keyboardType="number" row="0" col="1" text="{{ myText }}" propertyChange="{{ onPropertyChange }}"/>
+        <TextView class="notEnhancedTextView" keyboardType="number" row="0" col="1" text="{{ myText }}" propertyChange="{{ onPropertyChange }}"/>
 
         <Label row="1" col="0" text="Regular 'phone' keyboard"/>
         <TextView class="notEnhancedTextView" keyboardType="phone" row="1" col="1" text="12.34"/>
 
         <Label row="2" col="0" text="Plugin keyboard (by code)"/>
+        <!-- not 'TextField', because we can't get the changed value -->
         <TextView id="defaultPluginKeyboard" keyboardType="number" row="2" col="1" text="{{ myTextPlugin }}" propertyChange="{{ onPropertyChangePlugin }}"/>
 
         <Label row="3" col="0" text="Custom button title"/>
