@@ -5,7 +5,7 @@
       <GridLayout rows="auto, auto, auto, auto, auto, auto, auto, auto" columns="*, auto">
 
         <Label row="0" col="0" text="Regular 'number' keyboard"/>
-        <TextView class="notEnhancedTextView" keyboardType="number" row="0" col="1" text="{{ myText }}" propertyChange="{{ onPropertyChange }}"/>
+        <TextView className="notEnhancedTextView" keyboardType="number" row="0" col="1" text="{{ myText }}" propertyChange="{{ onPropertyChange }}"/>
 
         <Label row="1" col="0" text="Regular 'phone' keyboard"/>
         <TextView class="notEnhancedTextView" keyboardType="phone" row="1" col="1" text="12.34"/>
