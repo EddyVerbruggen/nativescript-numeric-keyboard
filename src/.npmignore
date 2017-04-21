@@ -1,0 +1,5 @@
+*.map
+*.ts
+!index.d.ts
+!*numeric-keyboard*.d.ts
+tsconfig.json
