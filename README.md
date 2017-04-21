@@ -1,4 +1,18 @@
 # NativeScript Numeric Keyboard
+
+[![Build Status][build-status]][build-url]
+[![NPM version][npm-image]][npm-url]
+[![Downloads][downloads-image]][npm-url]
+[![Twitter Follow][twitter-image]][twitter-url]
+
+[build-status]:https://travis-ci.org/EddyVerbruggen/nativescript-numeric-keyboard.svg?branch=master
+[build-url]:https://travis-ci.org/EddyVerbruggen/nativescript-numeric-keyboard
+[npm-image]:http://img.shields.io/npm/v/nativescript-numeric-keyboard.svg
+[npm-url]:https://npmjs.org/package/nativescript-numeric-keyboard
+[downloads-image]:http://img.shields.io/npm/dm/nativescript-numeric-keyboard.svg
+[twitter-image]:https://img.shields.io/twitter/follow/eddyverbruggen.svg?style=social&label=Follow%20me
+[twitter-url]:https://twitter.com/eddyverbruggen
+
 For iOS. Falls back to the best platform-provided numeric keyboard on Android. Note that the iPad UI looks a bit sleeker than shown in the screenshot below.
 
 <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/_readme-header.png" style="max-width: 100%"/>
