@@ -8,6 +8,7 @@ env:
 
 script:
   - cd demo
+  - npm i
   - tns test ios --emulator
 
 before_install:
