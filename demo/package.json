@@ -9,7 +9,7 @@
     }
   },
   "dependencies": {
-    "nativescript-numeric-keyboard": "file:../",
+    "nativescript-numeric-keyboard": "file:../src",
     "nativescript-unit-test-runner": "^0.3.0",
     "tns-core-modules": "^3.0.0 || ^3.0.0-rc.1"
   },
