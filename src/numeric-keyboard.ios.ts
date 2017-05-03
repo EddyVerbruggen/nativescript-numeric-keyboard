@@ -75,9 +75,12 @@ export class NumericKeyboard implements NumericKeyboardApi, TextAndDecimalSepara
       this._nativeTextView = args.textView.ios ? args.textView.ios : args.textView;
       this._nativeTextView.inputView = this._keyboard;
 
-      this._nativeTextView.textContainer.maximumNumberOfLines = 1;
-      this._nativeTextView.textContainer.lineBreakMode = NSLineBreakByTruncatingHead;
-      this._nativeTextView.scrollEnabled = false;
+      // not always available, fi when binding to a SearchBar
+      if (this._nativeTextView.textContainer !== undefined) {
+        this._nativeTextView.textContainer.maximumNumberOfLines = 1;
+        this._nativeTextView.textContainer.lineBreakMode = NSLineBreakByTruncatingHead;
+        this._nativeTextView.scrollEnabled = false;
+      }
 
       if (args.textView.ios !== undefined && !args.textView.backgroundColor) {
         args.textView.backgroundColor = new Color("transparent");
