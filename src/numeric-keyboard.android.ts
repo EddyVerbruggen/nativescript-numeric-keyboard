@@ -14,4 +14,9 @@ export class NumericKeyboardView extends NumericKeyboardViewBase {
     this.keyboardType = "number";
     return v;
   }
+
+  // prevents a crash on {N} 3 because editabletextbase doesn't check for
+  // this function to be defined before invoking it
+  public _onReturnPress(): void {
+  }
 }
