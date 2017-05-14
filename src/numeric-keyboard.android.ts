@@ -15,8 +15,8 @@ export class NumericKeyboardView extends NumericKeyboardViewBase {
     return v;
   }
 
-  // prevents a crash on {N} 3 because editabletextbase doesn't check for
-  // this function to be defined before invoking it
+  // prevents a crash on {N} 3 because editabletextbase doesn't check for this function to be defined before invoking it,
+  // see https://github.com/NativeScript/NativeScript/issues/4123
   public _onReturnPress(): void {
   }
 }
