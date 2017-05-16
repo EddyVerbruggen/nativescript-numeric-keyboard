@@ -64,14 +64,21 @@ It's similar (although a bit cleaner than in these screenshots), except for some
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/ipad-default-appearance.png" width="344px"/> | `<NK:NumericKeyboard text="123.45"/>` |
 
 ## Usage with Angular
-Open `app.module.ts` and add:
+Open `app.module.ts` and add either of these:
 
-```js
+#### With or without using Webpack
+
+```typescript
+import { registerElement } from "nativescript-angular";
+registerElement("NumericKeyboard", () => require("nativescript-numeric-keyboard").NumericKeyboardView);
+```
+
+#### When not using Webpack you may use this instead
+```typescript
 import { NSNUMKEY_DIRECTIVES } from "nativescript-numeric-keyboard/angular";
 
 declarations: [
   NSNUMKEY_DIRECTIVES,
-  // any other declarations
 ]
 ```
 
