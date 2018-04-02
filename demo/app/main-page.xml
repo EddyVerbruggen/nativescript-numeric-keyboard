@@ -5,17 +5,17 @@
       <GridLayout rows="auto, auto, auto, auto, auto, auto, auto, auto" columns="*, auto">
 
         <Label row="0" col="0" text="Regular 'number' keyboard"/>
-        <TextView class="notEnhancedTextView" keyboardType="number" row="0" col="1" text="{{ myText }}" propertyChange="{{ onPropertyChange }}"/>
+        <TextView maxLength="4" class="notEnhancedTextView" keyboardType="number" row="0" col="1" text="{{ myText }}" propertyChange="{{ onPropertyChange }}"/>
 
         <Label row="1" col="0" text="Regular 'phone' keyboard"/>
         <TextView class="notEnhancedTextView" keyboardType="phone" row="1" col="1" text="12.34"/>
 
         <Label row="2" col="0" text="Plugin keyboard (by code)"/>
         <!-- not 'TextField', because we can't get the changed value -->
-        <TextView id="defaultPluginKeyboard" keyboardType="number" row="2" col="1" text="{{ myTextPlugin }}" propertyChange="{{ onPropertyChangePlugin }}"/>
+        <TextView id="defaultPluginKeyboard" maxLength="4" keyboardType="number" row="2" col="1" text="{{ myTextPlugin }}" propertyChange="{{ onPropertyChangePlugin }}"/>
 
         <Label row="3" col="0" text="Custom button title"/>
-        <NumKey:NumericKeyboardView row="3" col="1" returnKeyTitle="OK :)" text="{{ myTextViewPlugin }}" propertyChange="{{ onPropertyChangeViewPlugin }}"/>
+        <NumKey:NumericKeyboardView maxLength="4" row="3" col="1" returnKeyTitle="OK :)" text="{{ myTextViewPlugin }}" propertyChange="{{ onPropertyChangeViewPlugin }}"/>
 
         <Label row="4" col="0" text="No decimals"/>
         <NumKey:NumericKeyboardView row="4" col="1" noDecimals="true" text="345"/>
@@ -28,7 +28,7 @@
 
         <Label row="7" col="0" text="No return key"/>
         <NumKey:NumericKeyboardView id="noReturnKey" noIpadInputBar="true" noReturnKey="true" row="7" col="1" text="678"/>
-      </GridLayout>
+      </GridLayout>e
     </ScrollView>
     <Button horizontalAlignment="center" text="submit" tap="{{ onSubmit }}"/>
   </StackLayout>

@@ -6,13 +6,13 @@ var nativescript_numeric_keyboard_1 = require("nativescript-numeric-keyboard");
 var NumericKeyboardDirective = (function () {
     function NumericKeyboardDirective() {
     }
+    NumericKeyboardDirective = __decorate([
+        core_1.Directive({
+            selector: "NumericKeyboard"
+        })
+    ], NumericKeyboardDirective);
     return NumericKeyboardDirective;
 }());
-NumericKeyboardDirective = __decorate([
-    core_1.Directive({
-        selector: "NumericKeyboard"
-    })
-], NumericKeyboardDirective);
 exports.NumericKeyboardDirective = NumericKeyboardDirective;
 exports.NSNUMKEY_DIRECTIVES = [NumericKeyboardDirective];
 elementRegistryModule.registerElement("NumericKeyboard", function () { return nativescript_numeric_keyboard_1.NumericKeyboardView; });

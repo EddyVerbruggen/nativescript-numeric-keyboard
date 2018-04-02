@@ -1,25 +1,25 @@
 {
   "nativescript": {
     "id": "org.nativescript.demo",
-    "tns-android": {
-      "version": "3.0.0"
-    },
     "tns-ios": {
-      "version": "3.0.0"
+      "version": "3.4.1"
+    },
+    "tns-android": {
+      "version": "3.4.1"
     }
   },
   "dependencies": {
     "nativescript-numeric-keyboard": "file:../src",
-    "nativescript-unit-test-runner": "^0.3.0",
-    "tns-core-modules": "^3.0.0"
+    "nativescript-unit-test-runner": "~0.3.0",
+    "tns-core-modules": "~3.4.0"
   },
   "devDependencies": {
     "babel-traverse": "^6.24.1",
     "babel-types": "^6.24.1",
     "babylon": "^6.16.1",
     "lazy": "1.0.11",
-    "nativescript-dev-typescript": "^0.4.2",
-    "tns-platform-declarations": "^3.0.0",
-    "typescript": "^2.2.2"
+    "nativescript-dev-typescript": "~0.6.0",
+    "tns-platform-declarations": "~3.4.0",
+    "typescript": "~2.6.0"
   }
 }

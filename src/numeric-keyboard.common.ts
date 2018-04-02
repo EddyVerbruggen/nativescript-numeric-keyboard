@@ -18,9 +18,10 @@ export interface NumericKeyboardApi {
 export interface TextAndDecimalSeparatorHolder {
   getDecimalSeparator(): string;
   getText(): string;
+  getMaxLength(): number;
 }
 
-export class NumericKeyboardViewBase extends TextView implements TextAndDecimalSeparatorHolder {
+export abstract class NumericKeyboardViewBase extends TextView implements TextAndDecimalSeparatorHolder {
   _decimalSep: string = "unset";
 
   get ios(): any {
@@ -37,6 +38,10 @@ export class NumericKeyboardViewBase extends TextView implements TextAndDecimalS
 
   getText(): string {
     return this.text;
+  }
+
+  getMaxLength(): number {
+    return this.maxLength;
   }
 }
 
