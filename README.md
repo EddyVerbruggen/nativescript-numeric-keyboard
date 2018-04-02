@@ -37,7 +37,7 @@ After adding the plugin you can add a namespace to your view (using `NumKey` bel
 
 ```xml
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:NK="nativescript-numeric-keyboard">
-  <NK:NumericKeyboardView text="123.45"/>
+  <NK:NumericKeyboardView text="123.45" maxLength="10" />
 </Page>
 ```
 
@@ -93,7 +93,7 @@ Say you have a plain old `TextView` in your view:
 
 ```html
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
-  <TextView id="myTextView" keyboardType="number" text="{{ myTextPlugin }}" />
+  <TextView id="myTextView" maxlength="8" keyboardType="number" text="{{ myTextPlugin }}" />
 </Page>
 ```
 
