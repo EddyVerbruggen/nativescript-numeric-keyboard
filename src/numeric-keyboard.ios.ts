@@ -1,3 +1,4 @@
+import { Color } from "tns-core-modules/color";
 import {
   NumericKeyboardApi,
   NumericKeyboardOptions,
@@ -9,7 +10,6 @@ import {
   noReturnKeyProperty,
   noIpadInputBarProperty
 } from "./numeric-keyboard.common";
-import { Color } from "color";
 
 // making sure this is retained
 let _numkeyboard: NumericKeyboard;

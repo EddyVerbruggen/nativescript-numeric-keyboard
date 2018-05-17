@@ -1,4 +1,4 @@
-import { TextView } from "ui/text-view";
+import { TextView } from "tns-core-modules/ui/text-view";
 import { Property, booleanConverter } from "tns-core-modules/ui/core/view";
 
 export interface NumericKeyboardOptions {
