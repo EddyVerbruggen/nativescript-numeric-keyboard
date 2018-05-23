@@ -1,7 +1,7 @@
 {
   "name": "nativescript-numeric-keyboard",
-  "version": "3.0.5",
-  "description": "Handy and elegant numeric keyboard for iOS NativeScript apps. On Android we fall back to the regular numeric keyboard for now.",
+  "version": "4.0.0",
+  "description": "Handy and elegant numeric keyboard for iOS NativeScript apps. On Android we fall back to the regular numeric keyboard.",
   "main": "numeric-keyboard",
   "typings": "index.d.ts",
   "nativescript": {

@@ -17,6 +17,8 @@ For iOS. Falls back to the best platform-provided numeric keyboard on Android. N
 
 <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/_readme-header.png" style="max-width: 100%"/>
 
+> BREAKING CHANGE in plugin version 4.0.0: we used to extend a `TextView`, now it's a `TextField`, because I finally hacked my way around a problem that prevented a TextField from emitting a `textChange` event. Note that unless you use the `decorate()` function this will not affect you (bar some now-fixed UI glitches).
+
 ## Installation
 From the command prompt go to your app's root folder and execute:
 
@@ -28,12 +30,13 @@ tns plugin add nativescript-numeric-keyboard
 Check out [the demo](demo) to play with the keyboard. You can run it by typing `npm run demo.iphone` / `npm run demo.ipad` at the root of the project.
 
 ## How it works
-This plugin wraps a [native keyboard library](https://cocoapods.org/?q=MMNumberKeyboard) and extends a regular [NativeScript TextView](https://docs.nativescript.org/cookbook/ui/text-view). You can set any property you'd normally set on this widget (`class`, `text`, etc) and a few plugin-specific properties as well.
+This plugin wraps a [native keyboard library](https://cocoapods.org/?q=MMNumberKeyboard) and extends a regular [NativeScript TextField](https://docs.nativescript.org/cookbook/ui/text-field).
+You can set any property you'd normally set on this widget (`class`, `text`, etc) and a few plugin-specific properties as well.
 
 You can either define the keyboard in XML or in code - use whichever tickles your fancy.
 
 ## Screenshot-driven documentation
-After adding the plugin you can add a namespace to your view (using `NumKey` below) and use the `NumericKeyboardView` tag to render a TextView powered by this plugin.
+After adding the plugin you can add a namespace to your view (using `NumKey` below) and use the `NumericKeyboardView` tag to render a TextField powered by this plugin.
 
 ```xml
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:NK="nativescript-numeric-keyboard">
@@ -41,12 +44,12 @@ After adding the plugin you can add a namespace to your view (using `NumKey` bel
 </Page>
 ```
 
-For comparison sake we kick off with the default appearance of a `TextView` and then showcase the various properties this plugin exposes:
+For comparison sake we kick off with the default appearance of a `TextField` and then showcase the various properties this plugin exposes:
 
 | Appearance | Declaration |
 | --- | --- |
-| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/regular-number.png" width="187px" height="333px"/> | `<TextView keyboardType="number" text="1.23"/>` |
-| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/regular-phone.png" width="187px" height="333px"/> | `<TextView keyboardType="phone" text="12.34"/>` |
+| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/regular-number.png" width="187px" height="333px"/> | `<TextField keyboardType="number" text="1.23"/>` |
+| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/regular-phone.png" width="187px" height="333px"/> | `<TextField keyboardType="phone" text="12.34"/>` |
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/default-plugin-appearance.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView text="123.45"/>` |
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/custom-button-title.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView returnKeyTitle="OK" text="234.56"/>` |
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/no-decimals.png" width="187px" height="333px"/> | `<NK:NumericKeyboardView noDecimals="true" text="345"/>` |
@@ -60,7 +63,7 @@ It's similar (although a bit cleaner than in these screenshots), except for some
 
 | Appearance | Declaration |
 | --- | --- |
-| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/ipad-regular-phone.png" width="344px"/> | `<TextView keyboardType="phone" text="12.34"/>` |
+| <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/ipad-regular-phone.png" width="344px"/> | `<TextField keyboardType="phone" text="12.34"/>` |
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/ipad-default-appearance.png" width="344px"/> | `<NK:NumericKeyboard text="123.45"/>` |
 
 ## Usage with Angular
@@ -89,27 +92,27 @@ For the views you can take a look at the examples above and just replace `NumKey
 ```
 
 ## Programmatic usage
-Say you have a plain old `TextView` in your view:
+Say you have a plain old `TextField` in your view:
 
 ```html
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
-  <TextView id="myTextView" maxlength="8" keyboardType="number" text="{{ myTextPlugin }}" />
+  <TextField id="myTextField" maxlength="8" keyboardType="number" text="{{ myTextPlugin }}" />
 </Page>
 ```
 
-Now you can enhance the `TextView` with this plugin by doing this in the `pageLoaded` event you've defined in the `<Page>` tag above:
+Now you can enhance the `TextField` with this plugin by doing fi. this in the `pageLoaded` event you've defined in the `<Page>` tag above:
 
 ```js
 import { NumericKeyboard } from "nativescript-numeric-keyboard";
 
 export function pageLoaded(args: observable.EventData) {
-  let page = <pages.Page>args.object;
-  let textView = <TextView>page.getViewById("myTextView");
-  // or even textView.ios
+  const page = <pages.Page>args.object;
+  const textField = <TextField>page.getViewById("myTextField");
+  // or even textField.ios
 
   // this is an example with all possible properties, not that they make sense combined :)
   new NumericKeyboard().decorate({
-    textView: textView,
+    textField: textField,
     returnKeyTitle: "Go!",
     locale: "en_US", // or "nl_NL", or any valid locale really (to define the decimal char)
     noReturnKey: true,
@@ -119,6 +122,4 @@ export function pageLoaded(args: observable.EventData) {
 }
 ```
 
-Note that you really need to use a `TextView`, not a `TextField` for this to work as rendering the keyboard works fine, but getting its value just seems to get messed up when we set a different keyboard view. Shouldn't be a problem though, just something to keep in mind.
-
-Also note that on Android you'll just get a numeric keyboard as usual (since we specified `keyboardType="number"`).
+Note that on Android you'll just get a numeric keyboard as usual (since we specified `keyboardType="number"`).

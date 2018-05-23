@@ -4,18 +4,17 @@
     <ScrollView verticalAlignment="top" style="background-color: #eee">
       <GridLayout rows="auto, auto, auto, auto, auto, auto, auto, auto" columns="*, auto">
 
-        <Label row="0" col="0" text="Regular 'number' keyboard"/>
-        <TextView maxLength="4" class="notEnhancedTextView" keyboardType="number" row="0" col="1" text="{{ myText }}" propertyChange="{{ onPropertyChange }}"/>
+        <Label row="0" col="0" text="Regular 'number' keyboard (max 4)"/>
+        <TextField maxLength="4" class="unenhancedTextField" keyboardType="number" row="0" col="1" text="{{ myText }}" loaded="onMyTextLoaded"/>
 
-        <Label row="1" col="0" text="Regular 'phone' keyboard"/>
-        <TextView class="notEnhancedTextView" keyboardType="phone" row="1" col="1" text="12.34"/>
+        <Label row="1" col="0" text="Regular 'phone' keyboard (max 4)"/>
+        <TextField class="unenhancedTextField" keyboardType="phone" row="1" col="1" text="12.34"/>
 
-        <Label row="2" col="0" text="Plugin keyboard (by code)"/>
-        <!-- not 'TextField', because we can't get the changed value -->
-        <TextView id="defaultPluginKeyboard" maxLength="4" keyboardType="number" row="2" col="1" text="{{ myTextPlugin }}" propertyChange="{{ onPropertyChangePlugin }}"/>
+        <Label row="2" col="0" text="Plugin keyboard (by code, max 4)"/>
+        <TextField id="defaultPluginKeyboard" maxLength="4" keyboardType="number" row="2" col="1" text="{{ myTextPlugin }}" loaded="onMyTextLoadedPluginCode"/>
 
-        <Label row="3" col="0" text="Custom button title"/>
-        <NumKey:NumericKeyboardView maxLength="4" row="3" col="1" returnKeyTitle="OK :)" text="{{ myTextViewPlugin }}" propertyChange="{{ onPropertyChangeViewPlugin }}"/>
+        <Label row="3" col="0" text="Custom button title (max 4)"/>
+        <NumKey:NumericKeyboardView maxLength="4" row="3" col="1" returnKeyTitle="OK :)" text="{{ myTextFieldPlugin }}" loaded="onMyTextLoadedPluginView"/>
 
         <Label row="4" col="0" text="No decimals"/>
         <NumKey:NumericKeyboardView row="4" col="1" noDecimals="true" text="345"/>

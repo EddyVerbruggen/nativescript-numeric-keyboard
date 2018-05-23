@@ -1,14 +1,14 @@
 import { Color } from "tns-core-modules/color";
 import {
+  localeProperty,
+  noDecimalsProperty,
+  noIpadInputBarProperty,
+  noReturnKeyProperty,
   NumericKeyboardApi,
   NumericKeyboardOptions,
   NumericKeyboardViewBase,
-  TextAndDecimalSeparatorHolder,
   returnKeyTitleProperty,
-  localeProperty,
-  noDecimalsProperty,
-  noReturnKeyProperty,
-  noIpadInputBarProperty
+  TextAndDecimalSeparatorHolder
 } from "./numeric-keyboard.common";
 
 // making sure this is retained
@@ -17,7 +17,7 @@ let _numkeyboard: NumericKeyboard;
 export class NumericKeyboard implements NumericKeyboardApi, TextAndDecimalSeparatorHolder {
   private _keyboardDelegate: MMNumberKeyboardDelegateImpl;
   private _keyboard: MMNumberKeyboard;
-  private _nativeTextView: UITextView;
+  private _nativeTextField: UITextField;
   private _decimalSep: string = "unset";
   private _maxLength: number;
 
@@ -26,23 +26,27 @@ export class NumericKeyboard implements NumericKeyboardApi, TextAndDecimalSepara
   }
 
   getText(): string {
-    return this._nativeTextView.text;
+    return this._nativeTextField.text;
   }
 
   getMaxLength(): number {
     return this._maxLength;
   }
 
+  getNativeTextField(): any {
+    return this._nativeTextField;
+  }
+
   decorate(args?: NumericKeyboardOptions): Promise<any> {
     _numkeyboard = this;
 
     return new Promise((resolve, reject) => {
-      if (!args || !args.textView) {
-        reject("Setting the 'textView' property is mandatory.");
+      if (!args || !args.textField) {
+        reject("Setting the 'textField' property is mandatory.");
         return;
       }
 
-      this._maxLength = args.textView.maxLength;
+      this._maxLength = args.textField.maxLength;
 
       let nslocale = null;
       if (args.locale) {
@@ -73,23 +77,16 @@ export class NumericKeyboard implements NumericKeyboardApi, TextAndDecimalSepara
         this._keyboard.returnKeyTitle = " ";
       }
 
-      this._nativeTextView = args.textView.ios ? args.textView.ios : args.textView;
-      this._nativeTextView.inputView = this._keyboard;
+      this._nativeTextField = args.textField.ios ? args.textField.ios : args.textField;
+      this._nativeTextField.inputView = this._keyboard;
 
-      // not always available, fi when binding to a SearchBar
-      if (this._nativeTextView.textContainer !== undefined) {
-        this._nativeTextView.textContainer.maximumNumberOfLines = 1;
-        this._nativeTextView.textContainer.lineBreakMode = NSLineBreakMode.ByTruncatingHead;
-        this._nativeTextView.scrollEnabled = false;
+      if (args.textField.ios !== undefined && !args.textField.backgroundColor) {
+        args.textField.backgroundColor = new Color("transparent");
       }
 
-      if (args.textView.ios !== undefined && !args.textView.backgroundColor) {
-        args.textView.backgroundColor = new Color("transparent");
-      }
-
-      if (args.noIpadInputBar && this._nativeTextView.inputAssistantItem) {
-        (<any>this._nativeTextView.inputAssistantItem).leadingBarButtonGroups = [];
-        (<any>this._nativeTextView.inputAssistantItem).trailingBarButtonGroups = [];
+      if (args.noIpadInputBar && this._nativeTextField.inputAssistantItem) {
+        (<any>this._nativeTextField.inputAssistantItem).leadingBarButtonGroups = [];
+        (<any>this._nativeTextField.inputAssistantItem).trailingBarButtonGroups = [];
       }
 
       resolve();
@@ -140,10 +137,6 @@ export class NumericKeyboardView extends NumericKeyboardViewBase {
     } else if (!this.returnKeyTitle) {
       this._keyboard.returnKeyTitle = " ";
     }
-
-    this.nativeView.textContainer.maximumNumberOfLines = 1;
-    this.nativeView.textContainer.lineBreakMode = NSLineBreakMode.ByTruncatingHead;
-    this.nativeView.scrollEnabled = false;
 
     // not exposing this just yet (not too useful)
     // keyboard.returnKeyButtonStyle = MMNumberKeyboardButtonStyleDone; // (Done = default, there's also White and Gray)
@@ -200,6 +193,10 @@ class MMNumberKeyboardDelegateImpl extends NSObject implements MMNumberKeyboardD
   }
 
   public numberKeyboardShouldInsertText(keyboard, text): boolean {
+    return this.numberKeyboardShouldInsertTextForTextField(keyboard, text);
+  }
+
+  private numberKeyboardShouldInsertTextForTextView(keyboard, text): boolean {
     const oldText: string = "" + this._owner.get().getText();
 
     const decimalSeparator: string = this._owner.get().getDecimalSeparator();
@@ -209,6 +206,46 @@ class MMNumberKeyboardDelegateImpl extends NSObject implements MMNumberKeyboardD
 
     const maxLength: number = this._owner.get().getMaxLength();
     return !(maxLength && oldText.length + text.length > maxLength);
+  }
+
+  private numberKeyboardShouldInsertTextForTextField(keyboard, text): boolean {
+    const owner = <any>this._owner.get();
+    const nativeView = owner.getNativeTextField();
+    const oldText = "" + this._owner.get().getText();
+
+    const decimalSeparator: string = this._owner.get().getDecimalSeparator();
+    if (text === decimalSeparator) {
+      return oldText.indexOf(decimalSeparator) === -1;
+    }
+
+    const maxLength: number = this._owner.get().getMaxLength();
+    const shouldInsert = !(maxLength && this._owner.get().getText() !== undefined && this._owner.get().getText().length + text.length > maxLength);
+    if (!shouldInsert) {
+      return false;
+    }
+
+    const range = {
+      location: 0,
+      length: nativeView.text.length === 0 ? 0 : nativeView.text.length
+    };
+
+    nativeView.delegate.textFieldShouldChangeCharactersInRangeReplacementString(nativeView, range, nativeView.text + text);
+    return true;
+  }
+
+  numberKeyboardShouldDeleteBackward(keyboard): boolean {
+    const owner = <any>this._owner.get();
+    const nativeView = owner.getNativeTextField();
+
+    const range = <NSRange>{
+      location: 0,
+      length: nativeView.text.length === 0 ? 0 : nativeView.text.length
+    };
+    let current = nativeView.text;
+    current = current.substring(0, current.length - 1);
+
+    nativeView.delegate.textFieldShouldChangeCharactersInRangeReplacementString(nativeView, range, current);
+    return true;
   }
 
   public numberKeyboardShouldReturn(keyboard): boolean {

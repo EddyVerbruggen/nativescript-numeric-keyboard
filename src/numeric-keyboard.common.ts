@@ -1,8 +1,8 @@
-import { TextView } from "tns-core-modules/ui/text-view";
-import { Property, booleanConverter } from "tns-core-modules/ui/core/view";
+import { TextField } from "tns-core-modules/ui/text-field";
+import { booleanConverter, Property } from "tns-core-modules/ui/core/view";
 
 export interface NumericKeyboardOptions {
-  textView: TextView;
+  textField: TextField;
   noDecimals?: boolean;
   noReturnKey?: boolean;
   returnKeyTitle?: string;
@@ -19,9 +19,10 @@ export interface TextAndDecimalSeparatorHolder {
   getDecimalSeparator(): string;
   getText(): string;
   getMaxLength(): number;
+  getNativeTextField(): any;
 }
 
-export abstract class NumericKeyboardViewBase extends TextView implements TextAndDecimalSeparatorHolder {
+export abstract class NumericKeyboardViewBase extends TextField implements TextAndDecimalSeparatorHolder {
   _decimalSep: string = "unset";
 
   get ios(): any {
@@ -42,6 +43,10 @@ export abstract class NumericKeyboardViewBase extends TextView implements TextAn
 
   getMaxLength(): number {
     return this.maxLength;
+  }
+
+  getNativeTextField(): number {
+    return this.nativeView;
   }
 }
 

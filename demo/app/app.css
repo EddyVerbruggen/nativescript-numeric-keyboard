@@ -12,14 +12,14 @@ Label {
   font-weight: bold;
 }
 
-TextView, NumericKeyboardView {
+TextField, NumericKeyboardView {
   font-size: 12;
   padding: 10;
   width: 120;
   text-align: right;
 }
 
-/* Enhanced TextViews are transparent by default */
-.notEnhancedTextView {
+/* Enhanced TextFields are transparent by default */
+.unenhancedTextField {
   background-color: transparent;
 }
