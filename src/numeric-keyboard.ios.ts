@@ -193,22 +193,6 @@ class MMNumberKeyboardDelegateImpl extends NSObject implements MMNumberKeyboardD
   }
 
   public numberKeyboardShouldInsertText(keyboard, text): boolean {
-    return this.numberKeyboardShouldInsertTextForTextField(keyboard, text);
-  }
-
-  private numberKeyboardShouldInsertTextForTextView(keyboard, text): boolean {
-    const oldText: string = "" + this._owner.get().getText();
-
-    const decimalSeparator: string = this._owner.get().getDecimalSeparator();
-    if (text === decimalSeparator) {
-      return oldText.indexOf(decimalSeparator) === -1;
-    }
-
-    const maxLength: number = this._owner.get().getMaxLength();
-    return !(maxLength && oldText.length + text.length > maxLength);
-  }
-
-  private numberKeyboardShouldInsertTextForTextField(keyboard, text): boolean {
     const owner = <any>this._owner.get();
     const nativeView = owner.getNativeTextField();
     const oldText = "" + this._owner.get().getText();
@@ -229,7 +213,9 @@ class MMNumberKeyboardDelegateImpl extends NSObject implements MMNumberKeyboardD
       length: nativeView.text.length === 0 ? 0 : nativeView.text.length
     };
 
-    nativeView.delegate.textFieldShouldChangeCharactersInRangeReplacementString(nativeView, range, nativeView.text + text);
+    if (nativeView.delegate && nativeView.delegate.textFieldShouldChangeCharactersInRangeReplacementString) {
+      nativeView.delegate.textFieldShouldChangeCharactersInRangeReplacementString(nativeView, range, nativeView.text + text);
+    }
     return true;
   }
 
@@ -244,7 +230,9 @@ class MMNumberKeyboardDelegateImpl extends NSObject implements MMNumberKeyboardD
     let current = nativeView.text;
     current = current.substring(0, current.length - 1);
 
-    nativeView.delegate.textFieldShouldChangeCharactersInRangeReplacementString(nativeView, range, current);
+    if (nativeView.delegate && nativeView.delegate.textFieldShouldChangeCharactersInRangeReplacementString) {
+      nativeView.delegate.textFieldShouldChangeCharactersInRangeReplacementString(nativeView, range, current);
+    }
     return true;
   }
 

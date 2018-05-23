@@ -1,8 +1,8 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:NumKey="nativescript-numeric-keyboard" loaded="pageLoaded">
   <StackLayout horizontalAlignment="center">
-    <Label class="title" text="Tap the numbers to see various versions of this awesome iOS numeric keyboard" textWrap="true" textAlignment="center"/>
+    <Label class="title" text="Tap the numbers on the right" textWrap="true" textAlignment="center"/>
     <ScrollView verticalAlignment="top" style="background-color: #eee">
-      <GridLayout rows="auto, auto, auto, auto, auto, auto, auto, auto" columns="*, auto">
+      <GridLayout rows="auto, auto, auto, auto, auto, auto, auto, auto, auto, auto" columns="*, auto">
 
         <Label row="0" col="0" text="Regular 'number' keyboard (max 4)"/>
         <TextField maxLength="4" class="unenhancedTextField" keyboardType="number" row="0" col="1" text="{{ myText }}" loaded="onMyTextLoaded"/>
@@ -27,7 +27,12 @@
 
         <Label row="7" col="0" text="No return key"/>
         <NumKey:NumericKeyboardView id="noReturnKey" noIpadInputBar="true" noReturnKey="true" row="7" col="1" text="678"/>
-      </GridLayout>e
+
+        <iOS>
+          <Label row="8" colSpan="2" text="BONUS ROUND: a SearchBar"/>
+          <SearchBar row="9" colSpan="2" hint="Only numbers allowed :)" id="searchBar"/>
+        </iOS>
+      </GridLayout>
     </ScrollView>
     <Button horizontalAlignment="center" text="submit" tap="{{ onSubmit }}"/>
   </StackLayout>
