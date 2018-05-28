@@ -203,7 +203,7 @@ class MMNumberKeyboardDelegateImpl extends NSObject implements MMNumberKeyboardD
     }
 
     const maxLength: number = this._owner.get().getMaxLength();
-    const shouldInsert = !(maxLength && this._owner.get().getText() !== undefined && this._owner.get().getText().length + text.length > maxLength);
+    const shouldInsert = !(maxLength && this._owner.get().getText() && this._owner.get().getText().length + text.length > maxLength);
     if (!shouldInsert) {
       return false;
     }
