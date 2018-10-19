@@ -14,10 +14,10 @@
         <TextField id="defaultPluginKeyboard" maxLength="4" keyboardType="number" row="2" col="1" text="{{ myTextPlugin }}" loaded="onMyTextLoadedPluginCode"/>
 
         <Label row="3" col="0" text="Custom button title (max 4)"/>
-        <NumKey:NumericKeyboardView maxLength="4" row="3" col="1" returnKeyTitle="OK :)" text="{{ myTextFieldPlugin }}" loaded="onMyTextLoadedPluginView"/>
+        <NumKey:NumericKeyboardView maxLength="4" row="3" col="1" returnKeyButtonBackgroundColor="red" returnKeyTitle="OK :)" text="{{ myTextFieldPlugin }}" loaded="onMyTextLoadedPluginView"/>
 
         <Label row="4" col="0" text="No decimals"/>
-        <NumKey:NumericKeyboardView row="4" col="1" noDecimals="true" text="345"/>
+        <NumKey:NumericKeyboardView row="4" col="1" returnKeyButtonBackgroundColor="#333333" noDecimals="true" text="345"/>
 
         <Label row="5" col="0" text="Locale en_US (point)"/>
         <NumKey:NumericKeyboardView row="5" col="1" locale="en_US" text="1,456.78"/>

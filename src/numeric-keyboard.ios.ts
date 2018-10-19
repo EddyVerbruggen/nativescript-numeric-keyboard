@@ -6,7 +6,7 @@ import {
   noReturnKeyProperty,
   NumericKeyboardApi,
   NumericKeyboardOptions,
-  NumericKeyboardViewBase,
+  NumericKeyboardViewBase, returnKeyButtonBackgroundColorProperty,
   returnKeyTitleProperty,
   TextAndDecimalSeparatorHolder
 } from "./numeric-keyboard.common";
@@ -77,6 +77,10 @@ export class NumericKeyboard implements NumericKeyboardApi, TextAndDecimalSepara
         this._keyboard.returnKeyTitle = " ";
       }
 
+      if (args.returnKeyButtonBackgroundColor) {
+        this._keyboard.returnKeyButtonBackgroundColor = args.returnKeyButtonBackgroundColor.ios;
+      }
+
       this._nativeTextField = args.textField.ios ? args.textField.ios : args.textField;
       this._nativeTextField.inputView = this._keyboard;
 
@@ -100,12 +104,14 @@ export class NumericKeyboardView extends NumericKeyboardViewBase {
   noDecimals: boolean;
   noReturnKey: boolean;
   noIpadInputBar: boolean;
+  returnKeyButtonBackgroundColor: Color;
 
   private _keyboardDelegate: MMNumberKeyboardDelegateImpl = null;
   private _keyboard: MMNumberKeyboard;
 
   public createNativeView(): Object {
     const v = super.createNativeView();
+    this.nativeView = v;
     this.applyProperties();
     return v;
   }
@@ -129,13 +135,15 @@ export class NumericKeyboardView extends NumericKeyboardViewBase {
     this._keyboard.delegate = this._keyboardDelegate;
 
     if (this.noReturnKey) {
-      this._keyboardDelegate.setCallback(() => {
-        return false;
-      });
+      this._keyboardDelegate.setCallback(() => false);
       this._keyboard.returnKeyTitle = " ";
       this._keyboard.returnKeyButtonStyle = MMNumberKeyboardButtonStyle.Gray; // (Done (blue) = default, there's also White)
     } else if (!this.returnKeyTitle) {
       this._keyboard.returnKeyTitle = " ";
+    }
+
+    if (this.returnKeyButtonBackgroundColor) {
+      this._keyboard.returnKeyButtonBackgroundColor = this.returnKeyButtonBackgroundColor.ios;
     }
 
     // not exposing this just yet (not too useful)
@@ -171,6 +179,10 @@ export class NumericKeyboardView extends NumericKeyboardViewBase {
 
   [noIpadInputBarProperty.setNative](value: boolean) {
     this.noIpadInputBar = value;
+  }
+
+  [returnKeyButtonBackgroundColorProperty.setNative](value: Color) {
+    this.returnKeyButtonBackgroundColor = value;
   }
 }
 

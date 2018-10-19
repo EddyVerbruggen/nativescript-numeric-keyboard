@@ -24,6 +24,8 @@ declare class MMNumberKeyboard extends UIInputView {
 
   returnKeyButtonStyle: MMNumberKeyboardButtonStyle;
 
+  returnKeyButtonBackgroundColor: UIColor;
+
   returnKeyTitle: string;
 
   constructor(o: { frame: CGRect; inputViewStyle: UIInputViewStyle; locale: NSLocale; });

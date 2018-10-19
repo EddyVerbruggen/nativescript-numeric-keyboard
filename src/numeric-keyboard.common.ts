@@ -1,10 +1,12 @@
 import { TextField } from "tns-core-modules/ui/text-field";
 import { booleanConverter, Property } from "tns-core-modules/ui/core/view";
+import { Color } from "tns-core-modules/color";
 
 export interface NumericKeyboardOptions {
   textField: TextField;
   noDecimals?: boolean;
   noReturnKey?: boolean;
+  returnKeyButtonBackgroundColor?: Color;
   returnKeyTitle?: string;
   locale?: string;
   noIpadInputBar?: boolean;
@@ -72,6 +74,13 @@ export const noReturnKeyProperty = new Property<NumericKeyboardViewBase, boolean
   valueConverter: booleanConverter
 });
 noReturnKeyProperty.register(NumericKeyboardViewBase);
+
+export const returnKeyButtonBackgroundColorProperty = new Property<NumericKeyboardViewBase, Color>({
+  name: "returnKeyButtonBackgroundColor",
+  defaultValue: null,
+  valueConverter: (c: string) => new Color(c)
+});
+returnKeyButtonBackgroundColorProperty.register(NumericKeyboardViewBase);
 
 export const noIpadInputBarProperty = new Property<NumericKeyboardViewBase, boolean>({
   name: "noIpadInputBar",

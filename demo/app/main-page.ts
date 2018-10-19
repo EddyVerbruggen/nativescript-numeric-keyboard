@@ -4,6 +4,7 @@ import { SearchBar } from "tns-core-modules/ui/search-bar";
 import { isIOS, Page } from "tns-core-modules/ui/page";
 import { HelloWorldModel } from "./main-view-model";
 import { NumericKeyboard } from "nativescript-numeric-keyboard";
+import { Color } from "tns-core-modules/color";
 
 // Event handler for Page 'loaded' event attached in main-page.xml
 export function pageLoaded(args: EventData) {
@@ -16,7 +17,8 @@ export function pageLoaded(args: EventData) {
     returnKeyTitle: "Go!",
     locale: "en_US",
     noDecimals: true,
-    noIpadInputBar: true
+    noIpadInputBar: true,
+    returnKeyButtonBackgroundColor: new Color("red")
   });
 
   if (isIOS) {
