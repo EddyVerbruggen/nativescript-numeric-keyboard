@@ -40,7 +40,7 @@ After adding the plugin you can add a namespace to your view (using `NumKey` bel
 
 ```xml
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" xmlns:NK="nativescript-numeric-keyboard">
-  <NK:NumericKeyboardView text="123.45" maxLength="10" />
+  <NK:NumericKeyboardView text="123.45" maxLength="10" returnKeyButtonBackgroundColor="#333333" />
 </Page>
 ```
 
@@ -104,6 +104,7 @@ Now you can enhance the `TextField` with this plugin by doing fi. this in the `p
 
 ```js
 import { NumericKeyboard } from "nativescript-numeric-keyboard";
+import { Color } from "tns-core-modules/color";
 
 export function pageLoaded(args: observable.EventData) {
   const page = <pages.Page>args.object;
@@ -117,7 +118,8 @@ export function pageLoaded(args: observable.EventData) {
     locale: "en_US", // or "nl_NL", or any valid locale really (to define the decimal char)
     noReturnKey: true,
     noDecimals: true,
-    noIpadInputBar: true // suppress the bar with buttons iOS renders on iPad since iOS 9
+    noIpadInputBar: true, // suppress the bar with buttons iOS renders on iPad since iOS 9
+    returnKeyButtonBackgroundColor: new Color("red") // optional, set this to change the (default) blue color of the 'return' key
   });
 }
 ```
