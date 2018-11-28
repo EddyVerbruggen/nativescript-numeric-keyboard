@@ -1,6 +1,5 @@
 # NativeScript Numeric Keyboard
 
-[![Build Status][build-status]][build-url]
 [![NPM version][npm-image]][npm-url]
 [![Downloads][downloads-image]][npm-url]
 [![Twitter Follow][twitter-image]][twitter-url]
@@ -102,7 +101,7 @@ Say you have a plain old `TextField` in your view:
 
 Now you can enhance the `TextField` with this plugin by doing fi. this in the `pageLoaded` event you've defined in the `<Page>` tag above:
 
-```js
+```typescript
 import { NumericKeyboard } from "nativescript-numeric-keyboard";
 import { Color } from "tns-core-modules/color";
 
@@ -119,11 +118,9 @@ export function pageLoaded(args: observable.EventData) {
     noReturnKey: true,
     noDecimals: true,
     noIpadInputBar: true, // suppress the bar with buttons iOS renders on iPad since iOS 9
-    returnKeyButtonBackgroundColor: new Color("red") // optional, set this to change the (default) blue color of the 'return' key
-    onReturnKeyPressed: (keyboard): boolean => {
-      
-      // You code here
-
+    returnKeyButtonBackgroundColor: new Color("red"), // optional, set this to change the (default) blue color of the 'return' key
+    onReturnKeyPressed: (): boolean => {
+      // Your code here
       return true; // Return true to hide/collapse the keyboard, use false to keep the keyboard in place.
     }
   });

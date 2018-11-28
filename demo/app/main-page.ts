@@ -1,10 +1,10 @@
-import { TextField } from "tns-core-modules/ui/text-field";
-import { EventData } from "tns-core-modules/data/observable";
-import { SearchBar } from "tns-core-modules/ui/search-bar";
-import { isIOS, Page } from "tns-core-modules/ui/page";
-import { HelloWorldModel } from "./main-view-model";
-import { NumericKeyboard } from "nativescript-numeric-keyboard";
-import { Color } from "tns-core-modules/color";
+import {TextField} from "tns-core-modules/ui/text-field";
+import {EventData} from "tns-core-modules/data/observable";
+import {SearchBar} from "tns-core-modules/ui/search-bar";
+import {isIOS, Page} from "tns-core-modules/ui/page";
+import {HelloWorldModel} from "./main-view-model";
+import {NumericKeyboard} from "nativescript-numeric-keyboard";
+import {Color} from "tns-core-modules/color";
 
 // Event handler for Page 'loaded' event attached in main-page.xml
 export function pageLoaded(args: EventData) {
@@ -33,9 +33,12 @@ export function pageLoaded(args: EventData) {
     if (textFieldContainerSubviews.count > 1) {
       new NumericKeyboard().decorate({
         textField: textFieldContainerSubviews.objectAtIndex(1),
-        noReturnKey: true,
         noDecimals: true,
-        noIpadInputBar: true
+        noIpadInputBar: true,
+        onReturnKeyPressed: (): boolean => {
+          console.log("onReturnKeyPressed");
+          return true; // Return true to hide/collapse the keyboard, use false to keep the keyboard in place.
+        }
       });
     }
   }

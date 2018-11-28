@@ -109,7 +109,7 @@ export class NumericKeyboardView extends NumericKeyboardViewBase {
   noReturnKey: boolean;
   noIpadInputBar: boolean;
   returnKeyButtonBackgroundColor: Color;
-  onReturnKeyPressed?: (keyboard: any) => boolean;
+  onReturnKeyPressed?: () => boolean;
 
   private _keyboardDelegate: MMNumberKeyboardDelegateImpl = null;
   private _keyboard: MMNumberKeyboard;
@@ -207,9 +207,9 @@ class MMNumberKeyboardDelegateImpl extends NSObject implements MMNumberKeyboardD
     return delegate;
   }
 
-  private _onReturnKeyPressedCallback: (keyboard) => boolean;
+  private _onReturnKeyPressedCallback: () => boolean;
 
-  public setCallback(callback: (keyboard?) => boolean): void {
+  public setCallback(callback: () => boolean): void {
     this._onReturnKeyPressedCallback = callback;
   }
 
@@ -257,9 +257,9 @@ class MMNumberKeyboardDelegateImpl extends NSObject implements MMNumberKeyboardD
     return true;
   }
 
-  public numberKeyboardShouldReturn(keyboard): boolean {
+  public numberKeyboardShouldReturn(keyboard: MMNumberKeyboard): boolean {
     if (this._onReturnKeyPressedCallback) {
-      return this._onReturnKeyPressedCallback(keyboard);
+      return this._onReturnKeyPressedCallback();
     } else {
       return true;
     }
