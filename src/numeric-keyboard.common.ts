@@ -10,7 +10,7 @@ export interface NumericKeyboardOptions {
   returnKeyTitle?: string;
   locale?: string;
   noIpadInputBar?: boolean;
-  // onReturnKeyPressed?: (keyboard: any) => boolean;
+  onReturnKeyPressed?: (keyboard: any) => boolean;
 }
 
 export interface NumericKeyboardApi {
