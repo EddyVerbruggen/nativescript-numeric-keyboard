@@ -69,6 +69,10 @@ export class NumericKeyboard implements NumericKeyboardApi, TextAndDecimalSepara
       this._keyboardDelegate = MMNumberKeyboardDelegateImpl.initWithOwner(new WeakRef(this));
       this._keyboard.delegate = this._keyboardDelegate;
 
+      if (args.onReturnKeyPressed) {
+        this._keyboardDelegate.setCallback(args.onReturnKeyPressed);
+      }
+
       if (args.noReturnKey) {
         this._keyboardDelegate.setCallback(() => false);
         this._keyboard.returnKeyTitle = " ";
@@ -105,6 +109,7 @@ export class NumericKeyboardView extends NumericKeyboardViewBase {
   noReturnKey: boolean;
   noIpadInputBar: boolean;
   returnKeyButtonBackgroundColor: Color;
+  onReturnKeyPressed?: (keyboard: any) => boolean;
 
   private _keyboardDelegate: MMNumberKeyboardDelegateImpl = null;
   private _keyboard: MMNumberKeyboard;
@@ -133,6 +138,10 @@ export class NumericKeyboardView extends NumericKeyboardViewBase {
 
     this._keyboardDelegate = MMNumberKeyboardDelegateImpl.initWithOwner(new WeakRef(this));
     this._keyboard.delegate = this._keyboardDelegate;
+
+    if (this.onReturnKeyPressed) {
+      this._keyboardDelegate.setCallback(this.onReturnKeyPressed);
+    }
 
     if (this.noReturnKey) {
       this._keyboardDelegate.setCallback(() => false);

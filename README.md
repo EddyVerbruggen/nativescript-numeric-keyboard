@@ -120,6 +120,12 @@ export function pageLoaded(args: observable.EventData) {
     noDecimals: true,
     noIpadInputBar: true, // suppress the bar with buttons iOS renders on iPad since iOS 9
     returnKeyButtonBackgroundColor: new Color("red") // optional, set this to change the (default) blue color of the 'return' key
+    onReturnKeyPressed: (keyboard): boolean => {
+      
+      // You code here
+
+      return true; // Return true to hide/collapse the keyboard, use false to keep the keyboard in place.
+    }
   });
 }
 ```
