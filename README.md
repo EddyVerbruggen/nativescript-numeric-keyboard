@@ -66,13 +66,13 @@ It's similar (although a bit cleaner than in these screenshots), except for some
 | <img src="https://raw.githubusercontent.com/EddyVerbruggen/nativescript-numeric-keyboard/master/screenshots/ipad-default-appearance.png" width="344px"/> | `<NK:NumericKeyboard text="123.45"/>` |
 
 ## Usage with Vue
-Open `main.ts` (or `.js`) and add this ([example](https://github.com/EddyVerbruggen/footplr/blob/3cea34a97a11726d6bd23252b79808ea35bb05ee/app/main.ts#L16):
+Open `main.ts` (or `.js`) and add this:
 
 ```typescript
 Vue.registerElement('NumericKeyboard', () => require('nativescript-numeric-keyboard').NumericKeyboardView);
 ```
 
-A usage example can be found [here](https://github.com/EddyVerbruggen/footplr/blob/3cea34a97a11726d6bd23252b79808ea35bb05ee/app/pages/home/components/measurements/measurement-entry/exercise/components/NumberInput.vue#L2).
+Check [this `registerElement` example](https://github.com/EddyVerbruggen/footplr/blob/3cea34a97a11726d6bd23252b79808ea35bb05ee/app/main.ts#L16), and [this usage example](https://github.com/EddyVerbruggen/footplr/blob/3cea34a97a11726d6bd23252b79808ea35bb05ee/app/pages/home/components/measurements/measurement-entry/exercise/components/NumberInput.vue#L2).
 
 ## Usage with Angular
 Open `app.module.ts` and add either of these:
