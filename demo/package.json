@@ -2,16 +2,16 @@
   "nativescript": {
     "id": "org.nativescript.demo",
     "tns-ios": {
-      "version": "4.2.0"
+      "version": "5.2.0"
     },
     "tns-android": {
-      "version": "5.0.0"
+      "version": "5.2.0"
     }
   },
   "dependencies": {
     "nativescript-numeric-keyboard": "file:../src",
     "nativescript-unit-test-runner": "~0.3.0",
-    "tns-core-modules": "~4.2.0"
+    "tns-core-modules": "~5.2.0"
   },
   "devDependencies": {
     "babel-traverse": "^6.24.1",
@@ -19,7 +19,7 @@
     "babylon": "^6.16.1",
     "lazy": "1.0.11",
     "nativescript-dev-typescript": "~0.6.0",
-    "tns-platform-declarations": "~4.2.0",
-    "typescript": "~2.6.0"
+    "tns-platform-declarations": "~5.2.0",
+    "typescript": "~2.8.0"
   }
 }
