@@ -12,7 +12,7 @@ import {
 } from "./numeric-keyboard.common";
 
 // making sure this is retained
-const _numkeyboard: Array<WeakRef<NumericKeyboard>> = [];
+const _numkeyboard: Array<NumericKeyboard> = [];
 
 export class NumericKeyboard implements NumericKeyboardApi, TextAndDecimalSeparatorHolder {
   private _keyboardDelegate: MMNumberKeyboardDelegateImpl;
@@ -38,7 +38,7 @@ export class NumericKeyboard implements NumericKeyboardApi, TextAndDecimalSepara
   }
 
   decorate(args?: NumericKeyboardOptions): Promise<any> {
-    _numkeyboard.push(new WeakRef(this));
+    _numkeyboard.push(this);
 
     return new Promise((resolve, reject) => {
       if (!args || !args.textField) {
@@ -96,6 +96,11 @@ export class NumericKeyboard implements NumericKeyboardApi, TextAndDecimalSepara
         (<any>this._nativeTextField.inputAssistantItem).leadingBarButtonGroups = [];
         (<any>this._nativeTextField.inputAssistantItem).trailingBarButtonGroups = [];
       }
+
+      // clean up the references
+      args.textField.on("unloaded", () => {
+        _numkeyboard.splice(_numkeyboard.indexOf(this), 1);
+      });
 
       resolve();
     });
