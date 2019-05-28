@@ -98,9 +98,11 @@ export class NumericKeyboard implements NumericKeyboardApi, TextAndDecimalSepara
       }
 
       // clean up the references
-      args.textField.on("unloaded", () => {
-        _numkeyboard.splice(_numkeyboard.indexOf(this), 1);
-      });
+      if (args.textField.on) {
+        args.textField.on("unloaded", () => {
+          _numkeyboard.splice(_numkeyboard.indexOf(this), 1);
+        });
+      }
 
       resolve();
     });
