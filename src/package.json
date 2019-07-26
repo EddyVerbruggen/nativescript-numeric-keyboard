@@ -1,6 +1,6 @@
 {
   "name": "nativescript-numeric-keyboard",
-  "version": "4.2.3",
+  "version": "4.3.0",
   "description": "Handy and elegant numeric keyboard for iOS NativeScript apps. On Android we fall back to the regular numeric keyboard.",
   "main": "numeric-keyboard",
   "typings": "index.d.ts",
@@ -17,10 +17,10 @@
     }
   },
   "scripts": {
-    "build": "tsc",
-    "demo.ios": "npm run preparedemo && cd ../demo && tns run ios --emulator",
-    "demo.ios.device": "npm run preparedemo && cd ../demo && tns platform remove ios && tns platform add ios && tns run ios",
-    "demo.android": "npm run preparedemo && cd ../demo && tns platform remove android && tns run android --justlaunch",
+    "tsc": "tsc -skipLibCheck",
+    "build": "npm i && npm run tsc",
+    "demo.ios": "npm run build && cd ../demo && tns run ios",
+    "demo.android": "npm run build && cd ../demo && tns run android",
     "preparedemo": "npm run build && cd ../demo && tns plugin remove nativescript-numeric-keyboard && tns plugin add ../src && tns install",
     "setup": "npm i && cd ../demo && npm i && cd ../src && npm run build",
     "tslint": "tslint *.ts",
@@ -52,10 +52,11 @@
   "readmeFilename": "README.md",
   "devDependencies": {
     "nativescript-angular": "^1.3.0",
+    "nativescript-dev-typescript": "~0.10.0",
     "zone.js": "~0.8.0",
-    "tns-core-modules": "~3.4.0",
-    "tns-platform-declarations": "~3.4.0",
-    "tslint": "^5.0.0",
-    "typescript": "~2.6.0"
+    "tns-core-modules": "~6.0.0",
+    "tns-platform-declarations": "~6.0.0",
+    "tslint": "~5.4.3",
+    "typescript": "~3.4.0"
   }
 }

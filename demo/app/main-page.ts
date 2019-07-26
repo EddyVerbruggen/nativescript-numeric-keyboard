@@ -44,6 +44,14 @@ export function pageLoaded(args: EventData) {
   }
 }
 
+export function textChange(args: EventData) {
+  console.log("textChange");
+}
+
+export function returnPress(args: EventData) {
+  console.log("returnPress");
+}
+
 export function onMyTextLoaded(args: EventData) {
   args.object.on("textChange", (args: EventData) => {
     let numkey = <TextField>args.object;

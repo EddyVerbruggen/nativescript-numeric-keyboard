@@ -14,7 +14,7 @@
         <TextField id="defaultPluginKeyboard" maxLength="4" keyboardType="number" row="2" col="1" text="{{ myTextPlugin }}" loaded="onMyTextLoadedPluginCode"/>
 
         <Label row="3" col="0" text="Custom button title (max 4)"/>
-        <NumKey:NumericKeyboardView maxLength="4" row="3" col="1" returnKeyButtonBackgroundColor="red" returnKeyTitle="OK :)" text="{{ myTextFieldPlugin }}" loaded="onMyTextLoadedPluginView"/>
+        <NumKey:NumericKeyboardView textChange="textChange" returnPress="returnPress" maxLength="4" row="3" col="1" returnKeyButtonBackgroundColor="red" returnKeyTitle="OK :)" text="{{ myTextFieldPlugin }}" xloaded="onMyTextLoadedPluginView"/>
 
         <Label row="4" col="0" text="No decimals"/>
         <NumKey:NumericKeyboardView row="4" col="1" returnKeyButtonBackgroundColor="#333333" noDecimals="true" text="345"/>

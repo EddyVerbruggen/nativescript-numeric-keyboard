@@ -1,4 +1,5 @@
 import { Color } from "tns-core-modules/color";
+import { TextField } from "tns-core-modules/ui/text-field";
 import {
   localeProperty,
   noDecimalsProperty,
@@ -6,7 +7,8 @@ import {
   noReturnKeyProperty,
   NumericKeyboardApi,
   NumericKeyboardOptions,
-  NumericKeyboardViewBase, returnKeyButtonBackgroundColorProperty,
+  NumericKeyboardViewBase,
+  returnKeyButtonBackgroundColorProperty,
   returnKeyTitleProperty,
   TextAndDecimalSeparatorHolder
 } from "./numeric-keyboard.common";
@@ -265,6 +267,10 @@ class MMNumberKeyboardDelegateImpl extends NSObject implements MMNumberKeyboardD
   }
 
   public numberKeyboardShouldReturn(keyboard: MMNumberKeyboard): boolean {
+    const owner = <any>this._owner.get();
+    if (owner) {
+      owner.notify({ eventName: TextField.returnPressEvent, object: owner });
+    }
     if (this._onReturnKeyPressedCallback) {
       return this._onReturnKeyPressedCallback();
     } else {

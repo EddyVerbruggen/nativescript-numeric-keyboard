@@ -5,23 +5,23 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "noEmitHelpers": true,
-        "noEmitOnError": false,
+        "noEmitOnError": true,
         "lib": [
-            "es2015.iterable",
             "es6",
             "dom"
         ],
         "baseUrl": ".",
         "paths": {
+            "~/*": [
+                "app/*"
+            ],
             "*": [
-                "./node_modules/tns-core-modules/*",
                 "./node_modules/*"
             ]
         }
     },
     "exclude": [
         "node_modules",
-        "platforms",
-        "**/*.aot.ts"
+        "platforms"
     ]
 }
