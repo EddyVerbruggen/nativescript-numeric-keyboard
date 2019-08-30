@@ -68,7 +68,7 @@ export class NumericKeyboard implements NumericKeyboardApi, TextAndDecimalSepara
       // not exposing this just yet (not too useful)
       // keyboard.returnKeyButtonStyle = MMNumberKeyboardButtonStyleDone; // (Done = default, there's also White and Gray)
 
-      this._keyboardDelegate = MMNumberKeyboardDelegateImpl.initWithOwner(new WeakRef(this));
+      this._keyboardDelegate = MMNumberKeyboardDelegateImpl.initWithOwner(new WeakRef(this), args.textField);
       this._keyboard.delegate = this._keyboardDelegate;
 
       if (args.onReturnKeyPressed) {
@@ -209,10 +209,12 @@ class MMNumberKeyboardDelegateImpl extends NSObject implements MMNumberKeyboardD
   public static ObjCProtocols = [MMNumberKeyboardDelegate];
 
   private _owner: WeakRef<TextAndDecimalSeparatorHolder>;
+  private _textFieldToNotify?: TextField;
 
-  public static initWithOwner(owner: WeakRef<TextAndDecimalSeparatorHolder>): MMNumberKeyboardDelegateImpl {
+  public static initWithOwner(owner: WeakRef<TextAndDecimalSeparatorHolder>, textFieldToNotify?: TextField): MMNumberKeyboardDelegateImpl {
     const delegate = <MMNumberKeyboardDelegateImpl>MMNumberKeyboardDelegateImpl.new();
     delegate._owner = owner;
+    delegate._textFieldToNotify = textFieldToNotify;
     return delegate;
   }
 
@@ -267,10 +269,15 @@ class MMNumberKeyboardDelegateImpl extends NSObject implements MMNumberKeyboardD
   }
 
   public numberKeyboardShouldReturn(keyboard: MMNumberKeyboard): boolean {
-    const owner = <any>this._owner.get();
-    if (owner) {
-      owner.notify({ eventName: TextField.returnPressEvent, object: owner });
+    if (this._textFieldToNotify && this._textFieldToNotify.notify) {
+      this._textFieldToNotify.notify({ eventName: TextField.returnPressEvent, object: this._textFieldToNotify });
+    } else {
+      const owner = <any>this._owner.get();
+      if (owner && owner.notify) {
+        owner.notify({ eventName: TextField.returnPressEvent, object: owner });
+      }
     }
+
     if (this._onReturnKeyPressedCallback) {
       return this._onReturnKeyPressedCallback();
     } else {

@@ -11,7 +11,7 @@
         <TextField class="unenhancedTextField" keyboardType="phone" row="1" col="1" text="12.34"/>
 
         <Label row="2" col="0" text="Plugin keyboard (by code, max 4)"/>
-        <TextField id="defaultPluginKeyboard" maxLength="4" keyboardType="number" row="2" col="1" text="{{ myTextPlugin }}" loaded="onMyTextLoadedPluginCode"/>
+        <TextField id="defaultPluginKeyboard" maxLength="4" keyboardType="number" row="2" col="1" text="{{ myTextPlugin }}" loaded="onMyTextLoadedPluginCode" returnPress="returnPress"/>
 
         <Label row="3" col="0" text="Custom button title (max 4)"/>
         <NumKey:NumericKeyboardView textChange="textChange" returnPress="returnPress" maxLength="4" row="3" col="1" returnKeyButtonBackgroundColor="red" returnKeyTitle="OK :)" text="{{ myTextFieldPlugin }}" xloaded="onMyTextLoadedPluginView"/>
