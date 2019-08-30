@@ -23,5 +23,8 @@
     "tslint": "~5.4.3",
     "typescript": "~3.4.0",
     "karma-webpack": "3.0.5"
+  },
+  "scripts": {
+    "build.plugin": "cd ../src && npm run build"
   }
 }
