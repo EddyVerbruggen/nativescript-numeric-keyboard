@@ -1,6 +1,4 @@
-import { TextField } from "tns-core-modules/ui/text-field";
-import { booleanConverter, Property } from "tns-core-modules/ui/core/view";
-import { Color } from "tns-core-modules/color";
+import { TextField, Property, Color, booleanConverter } from "@nativescript/core";
 
 export interface NumericKeyboardOptions {
   textField: TextField;

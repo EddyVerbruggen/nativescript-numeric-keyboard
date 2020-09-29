@@ -1,5 +1,4 @@
-import { Color } from "tns-core-modules/color";
-import { TextField } from "tns-core-modules/ui/text-field";
+import { Color, TextField } from "@nativescript/core";
 import {
   localeProperty,
   noDecimalsProperty,
@@ -50,7 +49,7 @@ export class NumericKeyboard implements NumericKeyboardApi, TextAndDecimalSepara
 
       this._maxLength = args.textField.maxLength;
 
-      let nslocale = null;
+      let nslocale;
       if (args.locale) {
         nslocale = NSLocale.localeWithLocaleIdentifier(args.locale);
       } else {
@@ -204,7 +203,7 @@ export class NumericKeyboardView extends NumericKeyboardViewBase {
   }
 }
 
-// https://developer.apple.com/reference/homekit/hmaccessorybrowserdelegate?language=objc
+@NativeClass()
 class MMNumberKeyboardDelegateImpl extends NSObject implements MMNumberKeyboardDelegate {
   public static ObjCProtocols = [MMNumberKeyboardDelegate];
 

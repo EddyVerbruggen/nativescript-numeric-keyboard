@@ -3,5 +3,8 @@
   "main": "nativescript-numeric-keyboard-directives.js",
   "dependencies": {
     "nativescript-numeric-keyboard": ".."
+  },
+  "devDependencies": {
+    "@angular/core": "~10.1.3"
   }
 }

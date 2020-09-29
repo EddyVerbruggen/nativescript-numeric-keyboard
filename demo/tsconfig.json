@@ -1,14 +1,17 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "es5",
+        "module": "esnext",
+        "target": "es2017",
+        "moduleResolution": "node",
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
+        "removeComments": false,
         "noEmitHelpers": true,
         "noEmitOnError": true,
         "lib": [
             "es6",
-            "dom"
+            "dom",
+            "es2017"
         ],
         "baseUrl": ".",
         "paths": {

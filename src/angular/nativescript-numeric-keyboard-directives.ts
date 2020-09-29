@@ -1,8 +1,7 @@
-import * as elementRegistryModule from "nativescript-angular/element-registry";
-import { Directive } from '@angular/core';
+import * as elementRegistryModule from "@nativescript/angular";
+import { Directive } from "@angular/core";
 
-// import { NumericKeyboardView } from "nativescript-numeric-keyboard";
-import { NumericKeyboardView } from "../";
+import { NumericKeyboardView } from "nativescript-numeric-keyboard";
 
 @Directive({
   selector: "NumericKeyboard"
