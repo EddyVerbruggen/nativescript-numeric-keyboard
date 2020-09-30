@@ -21,9 +21,19 @@ For iOS. Falls back to the best platform-provided numeric keyboard on Android. N
 ## Installation
 From the command prompt go to your app's root folder and execute:
 
+#### Since NativeScript 7
+
 ```
 tns plugin add nativescript-numeric-keyboard
 ```
+
+#### Before NativeScript 7
+
+```
+tns plugin add nativescript-numeric-keyboard@4
+```
+
+> mind the `@4` on the end, because since plugin version 5 we require NativeScript 7.
 
 ## Demo app
 Check out [the demo](demo) to play with the keyboard. You can run it by typing `npm run demo.iphone` / `npm run demo.ipad` at the root of the project.
@@ -75,22 +85,11 @@ Vue.registerElement('NumericKeyboard', () => require('nativescript-numeric-keybo
 Check [this `registerElement` example](https://github.com/EddyVerbruggen/footplr/blob/3cea34a97a11726d6bd23252b79808ea35bb05ee/app/main.ts#L16), and [this usage example](https://github.com/EddyVerbruggen/footplr/blob/3cea34a97a11726d6bd23252b79808ea35bb05ee/app/pages/home/components/measurements/measurement-entry/exercise/components/NumberInput.vue#L2).
 
 ## Usage with Angular
-Open `app.module.ts` and add either of these:
-
-#### With or without using Webpack
+Open `app.module.ts` and add:
 
 ```typescript
 import { registerElement } from "nativescript-angular";
 registerElement("NumericKeyboard", () => require("nativescript-numeric-keyboard").NumericKeyboardView);
-```
-
-#### When not using Webpack you may use this instead
-```typescript
-import { NSNUMKEY_DIRECTIVES } from "nativescript-numeric-keyboard/angular";
-
-declarations: [
-  NSNUMKEY_DIRECTIVES,
-]
 ```
 
 For the views you can take a look at the examples above and just replace `NumKey:NumericKeyboardView` by `NumericKeyboard `:

@@ -19,10 +19,10 @@
   "scripts": {
     "tsc": "tsc -skipLibCheck",
     "build": "npm i && ts-patch install && npm run tsc",
-    "demo.ios": "npm run build && cd ../demo && tns run ios",
+    "demo.ios": "npm run build && cd ../demo && tns run ios --emulator",
     "demo.android": "npm run build && cd ../demo && tns run android",
     "preparedemo": "npm run build && cd ../demo && tns plugin remove nativescript-numeric-keyboard && tns plugin add ../src && tns install",
-    "setup": "npm i && cd ../demo && npm i && cd ../src && npm run build",
+    "setup": "npm run build && cd ../demo && npm i",
     "tslint": "tslint *.ts",
     "tslint.demo": "tslint ../demo/app/*.ts",
     "ci.tslint": "npm i && tslint '**/*.ts' --config '../tslint.json' --exclude '**/node_modules/**' --exclude '**/typings/**'",
@@ -52,15 +52,12 @@
   "homepage": "https://github.com/EddyVerbruggen/nativescript-numeric-keyboard",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "@nativescript/angular": "~10.1.5",
     "@nativescript/core": "~7.0.5",
     "@nativescript/types": "~7.0.4",
     "@nativescript/webpack": "~3.0.0",
-    "ng-packagr": "^10.1.2",
     "ts-node": "^9.0.0",
     "ts-patch": "^1.3.0",
     "tslint": "~6.1.3",
-    "typescript": "~3.9.7",
-    "zone.js": "~0.11.1"
+    "typescript": "~3.9.7"
   }
 }

@@ -27,7 +27,7 @@ pack() {
 
     # compile package and copy files required by npm
     echo 'Building /src...'
-    cd "$TO_SOURCE_DIR"
+    cd "$TO_SOURCE_DIR" || exit
     node_modules/.bin/tsc
     cd ..
 
@@ -36,7 +36,7 @@ pack() {
     mkdir "$PACK_DIR"
 
     # create the package
-    cd "$PACK_DIR"
+    cd "$PACK_DIR" || exit
     npm pack ../"$TO_SOURCE_DIR"
 
     # delete source directory used to create the package
