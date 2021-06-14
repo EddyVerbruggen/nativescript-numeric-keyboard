@@ -25,10 +25,12 @@ export interface TextAndDecimalSeparatorHolder {
 export abstract class NumericKeyboardViewBase extends TextField implements TextAndDecimalSeparatorHolder {
   _decimalSep: string = "unset";
 
+  // @ts-ignore
   get ios(): any {
     return this.nativeView;
   }
 
+  // @ts-ignore
   set ios(value) {
     this.nativeView = value;
   }

@@ -203,7 +203,7 @@ export class NumericKeyboardView extends NumericKeyboardViewBase {
   }
 }
 
-@NativeClass()
+@NativeClass
 class MMNumberKeyboardDelegateImpl extends NSObject implements MMNumberKeyboardDelegate {
   public static ObjCProtocols = [MMNumberKeyboardDelegate];
 
