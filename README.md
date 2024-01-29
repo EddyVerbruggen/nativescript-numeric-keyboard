@@ -1,5 +1,47 @@
 # NativeScript Numeric Keyboard
 
+## IMPORTANT: Deprecated for NativeScript 8.x
+
+This plugin is no longer needed for NativeScript (NS) 8.x and iOS. It's been replaced by out of the box functionality in `TextField`. Attempting to run this plugin in NS 8.x even in [the demo](demo) returns an error `Error is: Command xcodebuild failed with exit code 65.`. Make the following changes in your NS 6 or NS 7 projects:
+
+```bash
+ns plugin remove nativescript-numeric-keyboard
+```
+Remove any references and code related to that plugin:
+```js
+// remove
+import { NumericKeyboard } from "nativescript-numeric-keyboard";
+
+// remove
+new NumericKeyboard().decorate({
+    textField: <TextField>page.getViewById('myTextFieldName'),
+    noDecimals: true,
+    noIpadInputBar: true,
+    returnKeyTitle: 'OK',
+    onReturnKeyPressed: (): boolean => {
+        // do something
+        return false; // Return true to hide/collapse the keyboard, use false to keep the keyboard in place.
+    }
+});
+```
+Replace any references in your XML files:
+```xml
+<!-- REMOVE reference -->
+<Page
+    xmlns:NK="nativescript-numeric-keyboard"
+>
+<!-- FROM -->
+<NK:NumericKeyboardView android:keyboardType="number" ... />
+<!-- TO OPTION #1 -->
+<TextField ios:keyboardType="integer" android:keyboardType="number" ... />
+<!-- TO OPTION #2 -->
+<TextField keyboardType="number" ... />
+```
+
+[Documentation](https://docs.nativescript.org/ui/text-field#keyboardtype) for the `keyboardType` has more options to choose.
+
+## Original Documentation Retained for Historical Purposes
+
 [![NPM version][npm-image]][npm-url]
 [![Downloads][downloads-image]][npm-url]
 [![Twitter Follow][twitter-image]][twitter-url]
